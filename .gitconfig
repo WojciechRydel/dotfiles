@@ -1,0 +1,22 @@
+[core]
+	excludesfile = $HOME/.gitignore_global
+    editor = vim
+[alias]
+    st = status
+    ci = commit -S
+	slog = log --show-signature
+	stag = tag -s
+	smerge = merge -S
+    srebase = rebase -S
+    stats=shortlog -sn
+    purge=! git branch -D $1 && git push -d origin $1
+[commit]
+    gpgsign=true
+
+[diff]
+      tool = icdiff
+	indentHeuristic = on
+[difftool]
+      prompt = false
+[difftool "icdiff"]
+      cmd = /usr/bin/icdiff --line-numbers $LOCAL $REMOTE | less
