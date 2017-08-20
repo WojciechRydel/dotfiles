@@ -13,6 +13,7 @@ let mapleader=','
 set ruler
 set colorcolumn=80
 set t_Co=256
+set noswapfile
 "----------- BASIC SETUP
 
 " autoremove trailing whitespaces on save
@@ -38,12 +39,15 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'vim-scripts/vim-autocomplpop'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
 Plugin 'ternjs/tern_for_vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
 
 call vundle#end()
 
@@ -75,3 +79,10 @@ nnoremap <F3> :NERDTreeFind<CR>
 
 " TAGBAR
 nnoremap <F9> :TagbarToggle<CR>
+
+" MARKDOWN
+au! BufRead,BufNewFile *.markdown set filetype=mkd
+au! BufRead,BufNewFile *.md       set filetype=mkd
+
+" jsx
+let g:jsx_ext_required = 0
