@@ -1,0 +1,3 @@
+#!/bin/sh
+branch_name=`git symbolic-ref --short HEAD`
+set GIT_REBASE_UPSTREAM_BRANCH=$branch_name

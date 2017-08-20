@@ -30,9 +30,13 @@ def get_parmas():
 
     return commit_msg_filepath, commit_type, commit_type
 
+rebase_branch = os.getenv('GIT_REBASE_UPSTREAM_BRANCH')
+
+if rebase_branch:
+    os.unsetenv('GIT_REBASE_UPSTREAM_BRANCH')
+    sys.exit(1)
 
 commit_msg_filepath, commit_type, commit_hash = get_parmas()
-print('commit-type', commit_type)
 match = re.match(BRANCH_RE, get_active_branch_name())
 
 if match:
