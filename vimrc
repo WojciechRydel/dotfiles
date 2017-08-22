@@ -14,6 +14,7 @@ set ruler
 set colorcolumn=80
 set t_Co=256
 set noswapfile
+nnoremap Q <nop>
 "----------- BASIC SETUP
 
 " autoremove trailing whitespaces on save
@@ -36,7 +37,6 @@ Plugin 'vim-airline/vim-airline-themes'
 
 Plugin 'davidhalter/jedi-vim'
 Plugin 'Raimondi/delimitMate'
-Plugin 'vim-scripts/vim-autocomplpop'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
@@ -49,6 +49,9 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'tpope/vim-surround'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'HerringtonDarkholme/yats.vim'
+Plugin 'Quramy/tsuquyomi'
 
 call vundle#end()
 
@@ -87,3 +90,11 @@ au! BufRead,BufNewFile *.md       set filetype=mkd
 
 " jsx
 let g:jsx_ext_required = 0
+
+if !exists("g:ycm_semantic_triggers")
+  let g:ycm_semantic_triggers = {}
+endif
+let g:ycm_semantic_triggers['typescript'] = ['.']
+
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
