@@ -15,6 +15,9 @@ set colorcolumn=80
 set t_Co=256
 set noswapfile
 nnoremap Q <nop>
+set timeout
+set timeoutlen=3000
+set ttimeoutlen=100
 "----------- BASIC SETUP
 
 " autoremove trailing whitespaces on save
