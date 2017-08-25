@@ -8,7 +8,7 @@ set relativenumber
 set cursorline
 set splitright
 set splitbelow
-colorscheme monokai
+colorscheme turtles
 let mapleader=','
 set ruler
 set colorcolumn=80
@@ -55,6 +55,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'HerringtonDarkholme/yats.vim'
 Plugin 'Quramy/tsuquyomi'
+Plugin 'vimwiki/vimwiki'
 
 call vundle#end()
 
