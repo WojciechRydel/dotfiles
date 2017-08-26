@@ -7,7 +7,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} bLOCK BELOW
-font pango:monospace 8
+font pango:Ubntu Mono 8
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -146,7 +146,11 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
+	font pango:Powerline 10
+	position top
+	tray_output none
+	status_command $HOME/.bumblebee-bar/bumblebee-status -m spotify nic disk:root cpu memory battery date time pasink pasource dnf -p root.path=/ time.format="%H:%M CW %V" date.format="%a, %b %d %Y" -t solarized-powerline
+
 }
 
 # Pulse Audio controls
