@@ -166,3 +166,6 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym $mod+Shift+x exec i3lock
 
 setxkbmap -layout pl
+exec setxkbmap -option caps:escape
+
+new_window pixel 3
