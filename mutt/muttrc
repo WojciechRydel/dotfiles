@@ -25,3 +25,6 @@ auto_view text/html application/x-pgp-message
 set mailcap_path="~/.mailcap"
 
 source ~/.mutt/sidebar.rc
+
+# macro to handle urls in message using urlview
+macro index \cb |urlview\n 'call urlview to extract URLs out of a message'
