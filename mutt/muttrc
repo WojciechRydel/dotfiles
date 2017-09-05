@@ -1,30 +1,37 @@
-set imap_user=rydel.wojciech@gmail.com
-set imap_pass=`gpg -dq $HOME/.mutt/gmial-pass.gpg`
-set folder=imaps://imap.gmail.com
-set spoolfile=+INBOX
-set imap_check_subscribed
-
 set header_cache=~/.cashe/mutt
-set postponed=+[Gmail]/Drafts
+set message_cachedir = "~/.cache/mutt"
 unset imap_passive
+set imap_check_subscribed
 set imap_keepalive=300
 set mail_check=120
-set my_pass=$gmail_pass
-set my_user=rydel.wojciech
-
-set realname = 'Wojciech Rydel'
-set from = rydel.wojciech@gmail.com
 set use_from = yes
-
-set smtp_url=smtps://$my_user:$my_pass@smtp.gmail.com
-set ssl_force_tls = yes
-
-
 set implicit_autoview
 auto_view text/html application/x-pgp-message
 set mailcap_path="~/.mailcap"
+set mbox_type=Maildir
+
+# Index View Options ---------------------------------
+set date_format = "%m/%d"
+set index_format = "[%Z]  %D  %-20.20F  %s"
+set sort = threads                         # like gmail
+set sort_aux = reverse-last-date-received  # like gmail
+set uncollapse_jump                        # don't collapse on an unread message
+set sort_re                                # thread based on regex
+set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
+bind index G imap-fetch-mail
 
 source ~/.mutt/sidebar.rc
 
 # macro to handle urls in message using urlview
 macro index \cb |urlview\n 'call urlview to extract URLs out of a message'
+
+
+folder-hook wojciech.rydel@skyconcept.pl 'source ~/.mutt/work'
+folder-hook rydel.wojciech@gmail.com 'source ~/.mutt/gmail'
+
+macro index,pager <f2> '<sync-mailbox><enter-command>source ~/.mutt/gmail<enter><change-folder>!<enter>'
+macro index,pager <f3> '<sync-mailbox><enter-command>source ~/.mutt/work<enter><change-folder>!<enter>'
+
+# default - work
+source "~/.mutt/work"
+

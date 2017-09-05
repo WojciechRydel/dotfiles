@@ -1,0 +1,13 @@
+set imap_user=wojciech.rydel@skyconcept.pl
+set imap_pass=`gpg -dq $HOME/.mutt/work.gpg`
+set folder=imaps://$imap_user@imap.zoho.com
+set spoolfile = +INBOX
+
+
+set smtp_url=smtps://wojciech.rydel:$imap_pass@smtp.zoho.com
+set realname='Wojciech Rydel'
+set from=$imap_user
+set ssl_force_tls=yes
+unset ssl_starttls
+
+account-hook $folder "set imap_user=$imap_user@$hostname imap_pass=$imap_pass"

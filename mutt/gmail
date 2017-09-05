@@ -1,0 +1,14 @@
+set imap_user=rydel.wojciech@gmail.com
+set imap_pass=`gpg -dq $HOME/.mutt/gmial-pass.gpg`
+set folder=imaps://$imap_user@imap.gmail.com
+set spoolfile = +INBOX
+
+
+set smtp_url=smtps://wojciech.rydel:$imap_pass@smtp.gmail.com
+set realname='Wojciech Rydel'
+set from=$imap_user
+set hostname=gmail.com
+set ssl_force_tls=yes
+unset ssl_starttls
+
+account-hook $folder "set imap_user=$imap_user@$hostname imap_pass=$imap_pass"

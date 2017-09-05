@@ -18,6 +18,14 @@ nnoremap Q <nop>
 set timeout
 set timeoutlen=3000
 set ttimeoutlen=100
+set autoindent
+set smartindent
+
+" Use ctrl-[hjkl] to select the active split!
+nmap <silent> <c-k> :wincmd k<CR>
+nmap <silent> <c-j> :wincmd j<CR>
+nmap <silent> <c-h> :wincmd h<CR>
+nmap <silent> <c-l> :wincmd l<CR>
 "----------- BASIC SETUP
 
 " autoremove trailing whitespaces on save
@@ -56,6 +64,7 @@ Plugin 'leafgarland/typescript-vim'
 Plugin 'HerringtonDarkholme/yats.vim'
 Plugin 'Quramy/tsuquyomi'
 Plugin 'vimwiki/vimwiki'
+Plugin 'magarcia/vim-angular2-snippets'
 
 call vundle#end()
 
@@ -84,6 +93,8 @@ let g:jedi#auto_close_doc=1
 " NERDTREE
 nnoremap <F2> :NERDTreeToggle<CR>
 nnoremap <F3> :NERDTreeFind<CR>
+let NERDTreeIgnore=['\~$', '\.orig$', '\.pyc$']
+
 
 " TAGBAR
 nnoremap <F9> :TagbarToggle<CR>
