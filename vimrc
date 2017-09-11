@@ -65,6 +65,8 @@ Plugin 'leafgarland/typescript-vim'
 Plugin 'HerringtonDarkholme/yats.vim'
 Plugin 'Quramy/tsuquyomi'
 Plugin 'vimwiki/vimwiki'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 
 call vundle#end()
 
@@ -114,3 +116,4 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 
 let g:vimwiki_list=[{'path': '~/Dropbox/wiki/', 'ext': '.md', 'syntax': 'markdown'}]
+
