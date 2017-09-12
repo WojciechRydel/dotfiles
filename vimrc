@@ -21,6 +21,7 @@ set ttimeoutlen=100
 set autoindent
 set smartindent
 
+set wildignore=*.pyc,*.orig
 " Use ctrl-[hjkl] to select the active split!
 nmap <silent> <c-k> :wincmd k<CR>
 nmap <silent> <c-j> :wincmd j<CR>
@@ -116,6 +117,11 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 
 let g:vimwiki_list=[{'path': '~/Dropbox/wiki/', 'ext': '.md', 'syntax': 'markdown'}]
+
+" CtrlP
+let g:ctrlp_custom_ignore = {
+\	'dir': 'node_modules'
+\}
 
 " UltiSnips
 source ./vim/utlisnips.vim
