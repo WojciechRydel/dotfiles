@@ -117,3 +117,5 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 
 let g:vimwiki_list=[{'path': '~/Dropbox/wiki/', 'ext': '.md', 'syntax': 'markdown'}]
 
+" UltiSnips
+source ./vim/utlisnips.vim
