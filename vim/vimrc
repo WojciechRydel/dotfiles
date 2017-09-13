@@ -20,7 +20,6 @@ set timeoutlen=3000
 set ttimeoutlen=100
 set autoindent
 set smartindent
-set paste
 
 set wildignore=*.pyc,*.orig
 " Use ctrl-[hjkl] to select the active split!
@@ -126,3 +125,4 @@ let g:ctrlp_custom_ignore = {
 
 " UltiSnips
 source $HOME/dotfiles/vim/utlisnips.vim
+source $HOME/dotfiles/vim/ctrlp.vim
