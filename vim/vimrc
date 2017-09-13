@@ -126,3 +126,4 @@ let g:ctrlp_custom_ignore = {
 " UltiSnips
 source $HOME/dotfiles/vim/utlisnips.vim
 source $HOME/dotfiles/vim/ctrlp.vim
+source $HOME/dotfiles/vim/fugitive.vim
