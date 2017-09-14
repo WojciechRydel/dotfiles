@@ -9,7 +9,7 @@ git ls-files | \
 if [ -n $VIRTUAL_ENV ]
 then
   find $VIRTUAL_ENV/lib/python* -name "*.py" | \
-  ctags --tag-relative -L - --append=yes -f"$dir/$$.tags"
+  ctags --exclude="**/IPython/*" --tag-relative -L - --append=yes -f"$dir/$$.tags"
 fi
 mv "$dir/$$.tags" "$dir/tags"
 
