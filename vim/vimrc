@@ -8,7 +8,7 @@ set relativenumber
 set cursorline
 set splitright
 set splitbelow
-colorscheme turtles
+colorscheme molokai
 let mapleader=','
 set ruler
 set colorcolumn=80
