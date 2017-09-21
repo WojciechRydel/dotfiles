@@ -96,7 +96,7 @@ let g:jedi#auto_close_doc=1
 " NERDTREE
 nnoremap <F2> :NERDTreeToggle<CR>
 nnoremap <F3> :NERDTreeFind<CR>
-let NERDTreeIgnore=['\~$', '\.orig$', '\.pyc$']
+let NERDTreeIgnore=['\~$', '\.orig$', '\.pyc$', '__pycache__']
 
 " TAGBAR
 nnoremap <F9> :TagbarToggle<CR>
