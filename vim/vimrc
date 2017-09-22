@@ -68,6 +68,7 @@ Plugin 'vimwiki/vimwiki'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'junegunn/fzf.vim'
+Plugin 'chriskempson/base16-vim'
 
 call vundle#end()
 
@@ -129,3 +130,8 @@ source $HOME/dotfiles/vim/fugitive.vim
 
 nnoremap <C-P> :FZF<CR>
 nnoremap <leader>. :Tags<CR>
+
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+endif
