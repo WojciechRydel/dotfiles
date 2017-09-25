@@ -8,7 +8,6 @@ set relativenumber
 set cursorline
 set splitright
 set splitbelow
-colorscheme molokai
 let mapleader=','
 set ruler
 set colorcolumn=80
@@ -68,6 +67,7 @@ Plugin 'Quramy/tsuquyomi'
 Plugin 'vimwiki/vimwiki'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+Plugin 'chriskempson/base16-vim'
 
 call vundle#end()
 
@@ -127,3 +127,5 @@ let g:ctrlp_custom_ignore = {
 source $HOME/dotfiles/vim/utlisnips.vim
 source $HOME/dotfiles/vim/ctrlp.vim
 source $HOME/dotfiles/vim/fugitive.vim
+
+colorscheme base16-default-dark
