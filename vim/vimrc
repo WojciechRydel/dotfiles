@@ -128,4 +128,5 @@ source $HOME/dotfiles/vim/utlisnips.vim
 source $HOME/dotfiles/vim/ctrlp.vim
 source $HOME/dotfiles/vim/fugitive.vim
 
+let base16colorspace=256
 colorscheme base16-default-dark
