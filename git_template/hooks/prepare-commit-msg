@@ -41,13 +41,16 @@ match = re.match(BRANCH_RE, branch_name)
 
 if match:
     issue_number = match.groupdict()['issue_id']
+    issue_marker = f'[{issue_number}]'
 
     with open(commit_msg_filepath, 'r+') as f:
         content = f.read()
         f.seek(0, 0)
 
-        if commit_type == TYPE_MESSAGE:
-            f.write("{0}\n\n[{1}]".format(content, issue_number))
+        if issue_marker in content:
+            pass
+        elif commit_type == TYPE_MESSAGE:
+            f.write(f'{content}\n\n{issue_marker}')
         else:
-            f.write("\n\n[{1}]{0}".format(content, issue_number))
+            f.write(f'\n\n{issue_marker}{content}')
 
