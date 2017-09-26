@@ -1,1 +1,1 @@
-text/html; lynx -dump -force_html  %s;  needsterminal; copiousoutput
+text/html; lynx -display-charset=UTF-8 -dump %s -assume_charset=%{charset}; nametemplate=%s.html; copiousoutput

@@ -54,7 +54,6 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'ternjs/tern_for_vim'
 Plugin 'majutsushi/tagbar'
-Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
@@ -67,6 +66,7 @@ Plugin 'Quramy/tsuquyomi'
 Plugin 'vimwiki/vimwiki'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+Plugin 'junegunn/fzf.vim'
 Plugin 'chriskempson/base16-vim'
 
 call vundle#end()
@@ -96,7 +96,7 @@ let g:jedi#auto_close_doc=1
 " NERDTREE
 nnoremap <F2> :NERDTreeToggle<CR>
 nnoremap <F3> :NERDTreeFind<CR>
-let NERDTreeIgnore=['\~$', '\.orig$', '\.pyc$']
+let NERDTreeIgnore=['\~$', '\.orig$', '\.pyc$', '__pycache__']
 
 " TAGBAR
 nnoremap <F9> :TagbarToggle<CR>
@@ -125,8 +125,10 @@ let g:ctrlp_custom_ignore = {
 
 " UltiSnips
 source $HOME/dotfiles/vim/utlisnips.vim
-source $HOME/dotfiles/vim/ctrlp.vim
 source $HOME/dotfiles/vim/fugitive.vim
+
+nnoremap <C-P> :FZF<CR>
+nnoremap <leader>. :Tags<CR>
 
 let base16colorspace=256
 colorscheme base16-default-dark
