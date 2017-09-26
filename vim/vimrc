@@ -8,7 +8,6 @@ set relativenumber
 set cursorline
 set splitright
 set splitbelow
-colorscheme molokai
 let mapleader=','
 set ruler
 set colorcolumn=80
@@ -130,8 +129,5 @@ source $HOME/dotfiles/vim/fugitive.vim
 
 nnoremap <C-P> :FZF<CR>
 nnoremap <leader>. :Tags<CR>
-
-if filereadable(expand("~/.vimrc_background"))
-  let base16colorspace=256
-  source ~/.vimrc_background
-endif
+let base16colorspace=256
+colorscheme base16-default-dark
