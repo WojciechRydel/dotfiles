@@ -1,3 +1,37 @@
 snippet impf "import {..} from '...'"
 import { $2 } from '$1';
 endsnippet
+
+snippet ngco "Angular component"
+import { Component } from '@angular/core';
+
+
+@Component({
+  selector: '$1',
+  template: ${2:'template'},
+})
+export class ${3:New}Component {
+  ${4:// body}
+}
+endsnippet
+
+snippet ngcoin "Angular component implements OnInit"
+import { Component, OnInit } from '@angular/core';
+
+
+@Component({
+  selector: '$1',
+  template: ${2:'template'},
+})
+export class ${3:New}Component implements OnInit {
+  ${4:// body}
+
+  ngOnInit() {
+    ${5:// code}
+  }
+}
+endsnippet
+
+snippet cc "class constructor"
+constructor($1) {}
+endsnippet
