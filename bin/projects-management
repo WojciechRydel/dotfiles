@@ -33,3 +33,34 @@ function edit_virtualenv {
 
   (cd $VIRTUAL_ENV && vim -O $VIRTUAL_ENV/bin/postactivate $VIRTUAL_ENV/bin/postdeactivate)
 }
+
+function checkout_libs {
+  BRANCH="$1"
+  echo $1
+  echo $BRANCH
+
+  if [ -z $BRANCH ]; then
+    echo "No branch name provided"
+    return 1
+  else
+    echo "Selected branch: $BRANCH"
+  fi
+
+  if [ -e $VIRTUAL_ENV/.project ]; then
+    DIR=`cat $VIRTUAL_ENV/.project`
+  elif [ -d `pwd`/lib ]; then
+    DIR=`pwd`/lib
+  else
+    echo "No lib directory found!"
+    return 1
+  fi
+
+  for node in $DIR/*; do
+    if [ -d $node ]; then
+      if [ -d $node/.git ]; then
+	echo "checkout $node onto $BRANCH"
+        (cd $node && git checkout $BRANCH )
+      fi
+    fi
+  done
+}
