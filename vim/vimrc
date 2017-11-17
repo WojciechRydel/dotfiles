@@ -19,6 +19,9 @@ set timeoutlen=3000
 set ttimeoutlen=100
 set autoindent
 set smartindent
+set tabstop=4
+set shiftwidth=4
+set expandtab
 
 set wildignore=*.pyc,*.orig
 " Use ctrl-[hjkl] to select the active split!
