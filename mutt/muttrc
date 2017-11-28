@@ -1,30 +1,19 @@
-set imap_user=rydel.wojciech@gmail.com
-set imap_pass=`gpg -dq $HOME/.mutt/gmial-pass.gpg`
-set folder=imaps://imap.gmail.com
-set spoolfile=+INBOX
-set imap_check_subscribed
-
+# GENERAL
 set header_cache=~/.cashe/mutt
-set postponed=+[Gmail]/Drafts
-unset imap_passive
-set imap_keepalive=300
-set mail_check=120
-set my_pass=$gmail_pass
-set my_user=rydel.wojciech
-
-set realname = 'Wojciech Rydel'
-set from = rydel.wojciech@gmail.com
-set use_from = yes
-
-set smtp_url=smtps://$my_user:$my_pass@smtp.gmail.com
-set ssl_force_tls = yes
-
-
 set implicit_autoview
 auto_view text/html application/x-pgp-message
 set mailcap_path="~/.mailcap"
-
+set ssl_force_tls = yes
+unset ssl_starttls
 source ~/.mutt/sidebar.rc
+set mail_check=120
 
+# IMAP
+set imap_check_subscribed
+unset imap_passive
+set imap_keepalive=300
+
+# default account - GMAIL
+source ~/dotfiles/mutt/gmail.conf
 # macro to handle urls in message using urlview
 macro index \cb |urlview\n 'call urlview to extract URLs out of a message'
