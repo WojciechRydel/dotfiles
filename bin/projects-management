@@ -64,3 +64,25 @@ function checkout_libs {
     fi
   done
 }
+
+function git_libs {
+  if [ -e $VIRTUAL_ENV/.project ]; then
+    DIR=`cat $VIRTUAL_ENV/.project`
+  elif [ -d `pwd`/lib ]; then
+    DIR=`pwd`/lib
+  else
+    echo "No lib directory found!"
+    return 1
+  fi
+
+  for dir in $DIR; do
+     if [ ! -d "$dir/.git" ]; then
+             continue
+     fi
+     pushd $dir > /dev/null
+     echo "$dir `git $1`"
+     popd > /dev/null
+     # popd
+  done
+
+}
