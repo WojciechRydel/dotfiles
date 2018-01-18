@@ -25,3 +25,12 @@
 --regex-js=/([A-Za-z$][A-Za-z0-9_$]+)[ \t]*=[ \t]*function[ \t]*\(/\1/f,function/
 --regex-js=/(function)*[ \t]*([A-Za-z$_][A-Za-z0-9_$]+)[ \t]*\([^)]*\)[ \t]*\{/\2/f,function/
 --regex-js=/['"]*([A-Za-z$][A-Za-z0-9_$]+)['"]*:[ \t]*function[ \t]*\(/\1/m,method/
+
+
+--langdef=JSX
+--langmap=jsx:.jsx
+--regex-jsx=/^[ \t]*import[ \t]+([^;]+)/\1/r,import,imports/
+--regex-jsx=/^[ \t]*([a-z]+[ \t]+)*function[ \t]+([A-Za-z0-9_]+[ \t]*[^{;]*)/\2/f,function,functions/
+--regex-jsx=/^[ \t]*([a-z]+[ \t]+)*class[ \t]+([A-Za-z0-9_]+)[ \t]*([^)])/\2/c,class,classes/
+--regex-jsx=/^[ \t]*([a-z]+[ \t]+)*interface[ \t]+([A-Za-z0-9_]+)[ \t]*([^)])/\2/i,interface,interfaces/
+--regex-jsx=/^[ \t]*([a-z]+[ \t]+)*mixin[ \t]+([A-Za-z0-9_]+)[ \t]*([^)])/\2/m,mixin,mixins/
