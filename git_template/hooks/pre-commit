@@ -21,19 +21,6 @@ CHECKS = [
         'print_filename': True,
     },
     {
-        'output': 'Checking for print statements...',
-        'command': 'grep -n print %s',
-        'match_files': ['.*\.py$'],
-        'ignore_files': ['.*migrations.*', '.*management/commands.*', '.*manage.py', '.*/scripts/.*'],
-        'print_filename': True,
-    },
-    {
-        'output': 'Checking for console.log()...',
-        'command': 'grep -n console.log %s',
-        'match_files': ['.*\.(js|ts)$'],
-        'print_filename': True,
-    },
-    {
         'output': 'Checking for debugger...',
         'command': 'grep -n debugger %s',
         'match_files': ['.*\.(js|ts)$'],
@@ -45,19 +32,6 @@ CHECKS = [
        'command': 'jshint %s | grep -v "Lint Free!"',
        'match_files': ['.*yipit/.*\.js$'],
        'print_filename': False,
-    },
-    {
-        'output': 'Running pep8...',
-        'command': 'pep8 -r --ignore=E501,W293,W391,E402 %s',
-        'match_files': ['.*\.py$'],
-        'ignore_files': ['.*migrations.*'],
-        'print_filename': False,
-    },
-    {
-        'output': 'Checking for Sass changes...',
-        'command': 'sass --quiet --update %s',
-        'match_files': ['.*\.scss$'],
-        'print_filename': True,
     },
 ]
 
