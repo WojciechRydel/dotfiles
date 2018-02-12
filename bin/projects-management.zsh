@@ -28,7 +28,7 @@ function run_django_server {
 function edit_virtualenv {
   if [ -z $VIRTUAL_ENV ]; then
     echo "No Python virtual environment activated!"
-    exit 1
+    return 1
   fi
 
   (cd $VIRTUAL_ENV && vim -O $VIRTUAL_ENV/bin/postactivate $VIRTUAL_ENV/bin/postdeactivate)
