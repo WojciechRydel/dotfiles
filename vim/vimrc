@@ -22,6 +22,8 @@ set smartindent
 set tabstop=4
 set shiftwidth=4
 set expandtab
+set backspace=indent,eol,start
+colorscheme turtles
 
 set wildignore=*.pyc,*.orig
 " Use ctrl-[hjkl] to select the active split!
@@ -29,6 +31,8 @@ nmap <silent> <c-k> :wincmd k<CR>
 nmap <silent> <c-j> :wincmd j<CR>
 nmap <silent> <c-h> :wincmd h<CR>
 nmap <silent> <c-l> :wincmd l<CR>
+
+nmap <silent> <leader>q :quit<CR>
 
 "----------- BASIC SETUP
 
@@ -55,23 +59,15 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
-Plugin 'ternjs/tern_for_vim'
-Plugin 'majutsushi/tagbar'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
 Plugin 'tpope/vim-surround'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'HerringtonDarkholme/yats.vim'
-Plugin 'Quramy/tsuquyomi'
 Plugin 'vimwiki/vimwiki'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
-Plugin 'chriskempson/base16-vim'
-
 call vundle#end()
 
 filetype plugin on
@@ -111,20 +107,15 @@ au! BufRead,BufNewFile *.md       set filetype=mkd
 " jsx
 let g:jsx_ext_required = 0
 
-if !exists("g:ycm_semantic_triggers")
-  let g:ycm_semantic_triggers = {}
-endif
-let g:ycm_semantic_triggers['typescript'] = ['.']
+" if !exists("g:ycm_semantic_triggers")
+"   let g:ycm_semantic_triggers = {}
+" endif
+" let g:ycm_semantic_triggers['typescript'] = ['.']
 
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 
-let g:vimwiki_list=[{'path': '~/Dropbox/wiki/', 'ext': '.md', 'syntax': 'markdown'}]
-
-" CtrlP
-let g:ctrlp_custom_ignore = {
-\	'dir': 'node_modules'
-\}
+let g:vimwiki_list=[{'path': '~/Dropbox/wiki/'}]
 
 " UltiSnips
 source $HOME/dotfiles/vim/utlisnips.vim
@@ -132,6 +123,14 @@ source $HOME/dotfiles/vim/fugitive.vim
 
 nnoremap <C-P> :FZF<CR>
 nnoremap <leader>. :Tags<CR>
+nnoremap <leader>b :Gblame<CR>
+nnoremap <leader>f :NERDTreeFind<CR>
+nnoremap <leader>s :setlocal spell!<CR>
 
-let base16colorspace=256
-colorscheme base16-default-dark
+source $HOME/dotfiles/vim/syntastic.vim
+
+set fileformats=unix,mac,dos
+
+autocmd! FileType python nnoremap <leader>x :terminal python3 %<CR>
+autocmd! FileType go nnoremap <silent> <leader>t :terminal go test<CR>
+
