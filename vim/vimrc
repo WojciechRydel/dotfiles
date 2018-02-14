@@ -82,7 +82,6 @@ set updatetime=250
 
 " POWERLINE
 let g:airline_theme='dark'
-let g:airline#exensions#syntastic#enabled=1
 let g:airline#extensions#branch#enabled=1
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tagbar#enabled=1
@@ -129,8 +128,6 @@ nnoremap <leader>. :Tags<CR>
 nnoremap <leader>b :Gblame<CR>
 nnoremap <leader>f :NERDTreeFind<CR>
 nnoremap <leader>s :setlocal spell!<CR>
-
-source $HOME/dotfiles/vim/syntastic.vim
 
 set fileformats=unix,mac,dos
 
