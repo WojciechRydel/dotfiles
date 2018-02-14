@@ -1,12 +1,16 @@
+[user]
+    name = Wojciech Rydel
+    email = rydel.wojciech@gmail.com
+    signingkey = 45D9F6F98EC117B7FA01D3BD9B8BEF4DE4421E47
 [core]
-	excludesfile = $HOME/.gitignore_global
+    excludesfile = $HOME/.gitignore_global
     editor = vim
 [alias]
     st = status
     ci = commit -S
-	slog = log --show-signature
-	stag = tag -s
-	smerge = merge -S
+    slog = log --show-signature
+    stag = tag -s
+    smerge = merge -S
     srebase = rebase -S
     stats=shortlog -sn
     purge=! git branch -D $1 && git push -d origin $1
@@ -15,7 +19,7 @@
 
 [diff]
       tool = icdiff
-	indentHeuristic = on
+    indentHeuristic = on
 [difftool]
       prompt = false
 [difftool "icdiff"]
