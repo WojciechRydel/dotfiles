@@ -68,6 +68,9 @@ Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
+
+Plugin 'mileszs/ack.vim'
+
 call vundle#end()
 
 filetype plugin on
@@ -134,3 +137,5 @@ set fileformats=unix,mac,dos
 autocmd! FileType python nnoremap <leader>x :terminal python3 %<CR>
 autocmd! FileType go nnoremap <silent> <leader>t :terminal go test<CR>
 
+" ack.vim - search
+let g:ackprg = 'ag --vimgrep'
