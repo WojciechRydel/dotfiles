@@ -16,6 +16,12 @@ export PATH=$PATH:$GOPATH/bin
 
 # aliases
 alias v=vim
+
+# notes
+function vn {
+    (cd ~/Dropbox/notes && vim -c NERDTree)
+}
+
 alias rr=ranger
 
 # TMUX
