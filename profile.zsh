@@ -19,7 +19,7 @@ alias v=vim
 
 # notes
 function vn {
-    (cd ~/Dropbox/notes && vim -c NERDTree)
+    (cd ~/Dropbox/notes && vim -c Goyo)
 }
 
 alias rr=ranger
