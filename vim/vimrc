@@ -63,13 +63,19 @@ Plugin 'editorconfig/editorconfig-vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'tpope/vim-surround'
-Plugin 'vimwiki/vimwiki'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 
 Plugin 'mileszs/ack.vim'
+
+" MARKDOWN plugins
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+
+" distract free mode
+Plugin 'junegunn/goyo.vim'
 
 call vundle#end()
 
@@ -103,8 +109,11 @@ let NERDTreeIgnore=['\~$', '\.orig$', '\.pyc$', '__pycache__']
 nnoremap <F9> :TagbarToggle<CR>
 
 " MARKDOWN
-au! BufRead,BufNewFile *.markdown set filetype=mkd
-au! BufRead,BufNewFile *.md       set filetype=mkd
+au! BufRead,BufNewFile *.markdown set filetype=markdown
+au! BufRead,BufNewFile *.md       set filetype=markdown
+
+" JSON specyfic
+au! BufRead,BufNewFile *.json set textwidth=0
 
 " jsx
 let g:jsx_ext_required = 0
@@ -116,8 +125,6 @@ let g:jsx_ext_required = 0
 
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
-
-let g:vimwiki_list=[{'path': '~/Dropbox/wiki/'}]
 
 " UltiSnips
 source $HOME/dotfiles/vim/utlisnips.vim
@@ -136,3 +143,7 @@ autocmd! FileType go nnoremap <silent> <leader>t :terminal go test<CR>
 
 " ack.vim - search
 let g:ackprg = 'ag --vimgrep'
+
+" markdown plugin setup
+let g:vim_markdown_folding_disabled = 1
+
