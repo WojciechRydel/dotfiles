@@ -48,6 +48,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-haml'
 Plugin 'beigebrucewayne/Turtles'
 Plugin 'airblade/vim-gitgutter'
 
