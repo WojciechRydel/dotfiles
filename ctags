@@ -35,6 +35,7 @@
 --regex-jsx=/^[ \t]*([a-z]+[ \t]+)*interface[ \t]+([A-Za-z0-9_]+)[ \t]*([^)])/\2/i,interface,interfaces/
 --regex-jsx=/^[ \t]*([a-z]+[ \t]+)*mixin[ \t]+([A-Za-z0-9_]+)[ \t]*([^)])/\2/m,mixin,mixins/
 
+
 --langdef=markdown
 --langmap=markdown:.md
 --regex-markdown=/^#+(.+)/\1/h1/

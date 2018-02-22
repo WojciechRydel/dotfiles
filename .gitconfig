@@ -1,7 +1,7 @@
 [user]
     name = Wojciech Rydel
     email = rydel.wojciech@gmail.com
-    signinkey = 45D9F6F98EC117B7FA01D3BD9B8BEF4DE4421E47
+    signingkey = 45D9F6F98EC117B7FA01D3BD9B8BEF4DE4421E47
 [core]
     excludesfile = $HOME/.gitignore_global
     editor = vim

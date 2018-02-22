@@ -1,7 +1,6 @@
 # dotfiles
 My personal dotfiles
 
-
 ## Toolbox:
 - editor - [Vim](https://vim.sourceforge.io/)
 - file manager - [ranger](https://ranger.github.io/)
@@ -10,4 +9,3 @@ My personal dotfiles
 - notes - Markdown + Vim
 - password store - [KeePassXC](https://keepassxc.org/)
 - encryption/signing - [GnuPG](https://gnupg.org/)
-
