@@ -63,11 +63,21 @@ Plugin 'editorconfig/editorconfig-vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'tpope/vim-surround'
-Plugin 'vimwiki/vimwiki'
+
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
+
+Plugin 'mileszs/ack.vim'
+
+" MARKDOWN plugins
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+
+" distract free mode
+Plugin 'junegunn/goyo.vim'
+
 call vundle#end()
 
 filetype plugin on
@@ -79,7 +89,6 @@ set updatetime=250
 
 " POWERLINE
 let g:airline_theme='dark'
-let g:airline#exensions#syntastic#enabled=1
 let g:airline#extensions#branch#enabled=1
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tagbar#enabled=1
@@ -101,8 +110,11 @@ let NERDTreeIgnore=['\~$', '\.orig$', '\.pyc$', '__pycache__']
 nnoremap <F9> :TagbarToggle<CR>
 
 " MARKDOWN
-au! BufRead,BufNewFile *.markdown set filetype=mkd
-au! BufRead,BufNewFile *.md       set filetype=mkd
+au! BufRead,BufNewFile *.markdown set filetype=markdown
+au! BufRead,BufNewFile *.md       set filetype=markdown
+
+" JSON specyfic
+au! BufRead,BufNewFile *.json set textwidth=0
 
 " jsx
 let g:jsx_ext_required = 0
@@ -115,8 +127,6 @@ let g:jsx_ext_required = 0
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 
-let g:vimwiki_list=[{'path': '~/Dropbox/wiki/'}]
-
 " UltiSnips
 source $HOME/dotfiles/vim/utlisnips.vim
 source $HOME/dotfiles/vim/fugitive.vim
@@ -127,10 +137,14 @@ nnoremap <leader>b :Gblame<CR>
 nnoremap <leader>f :NERDTreeFind<CR>
 nnoremap <leader>s :setlocal spell!<CR>
 
-source $HOME/dotfiles/vim/syntastic.vim
-
 set fileformats=unix,mac,dos
 
 autocmd! FileType python nnoremap <leader>x :terminal python3 %<CR>
 autocmd! FileType go nnoremap <silent> <leader>t :terminal go test<CR>
+
+" ack.vim - search
+let g:ackprg = 'ag --vimgrep'
+
+" markdown plugin setup
+let g:vim_markdown_folding_disabled = 1
 

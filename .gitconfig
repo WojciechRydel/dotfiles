@@ -18,7 +18,7 @@
     gpgsign=true
 
 [diff]
-      tool = icdiff
+    tool = icdiff
     indentHeuristic = on
 [difftool]
       prompt = false
