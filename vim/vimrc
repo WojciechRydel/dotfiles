@@ -26,6 +26,10 @@ set clipboard=unnamed
 set backspace=indent,eol,start
 colorscheme turtles
 
+" persistent history
+set undofile
+set undodir=~/.vim/undodir
+
 set wildignore=*.pyc,*.orig
 " Use ctrl-[hjkl] to select the active split!
 nmap <silent> <c-k> :wincmd k<CR>
