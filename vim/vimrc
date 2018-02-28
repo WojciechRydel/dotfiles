@@ -32,6 +32,8 @@ set undodir=~/.vim/undodir
 au BufWritePre /tmp/* setlocal noundofile " do not trach file history for /tmp/
 " -------------------------
 
+set autoread
+
 set wildignore=*.pyc,*.orig
 " Use ctrl-[hjkl] to select the active split!
 nmap <silent> <c-k> :wincmd k<CR>
