@@ -26,9 +26,11 @@ set clipboard=unnamed
 set backspace=indent,eol,start
 colorscheme turtles
 
-" persistent history
+" --- PERSISTENT HISTORY ---
 set undofile
 set undodir=~/.vim/undodir
+au BufWritePre /tmp/* setlocal noundofile " do not trach file history for /tmp/
+" -------------------------
 
 set wildignore=*.pyc,*.orig
 " Use ctrl-[hjkl] to select the active split!
