@@ -3,8 +3,6 @@ export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Devel
 source /usr/local/bin/virtualenvwrapper.sh
 
-source ~/dotfiles/bin/projects-management
-
 export PATH=$PATH:$HOME/bin:$HOME/Library/Python/3.6/bin
 
 export EDITOR=vim
@@ -14,15 +12,11 @@ export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
 
-# aliases
-alias v=vim
-
 # notes
 function vn {
     (cd ~/Dropbox/notes && vim -c Goyo)
 }
 
-alias rr=ranger
 
 # TMUX
 HOME_SESSION=HOME
@@ -40,3 +34,5 @@ source ~/.bin/tmuxinator.zsh
 # fzf default command
 # use ag(silver search) get file list and also include hidden files into search
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -f -g ""'
+
+source ./aliases.zsh
