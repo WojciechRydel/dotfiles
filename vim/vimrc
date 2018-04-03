@@ -69,6 +69,7 @@ Plugin 'davidhalter/jedi-vim'
 Plugin 'Raimondi/delimitMate'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'pangloss/vim-javascript'
+Plugin 'w0rp/ale'
 Plugin 'mxw/vim-jsx'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'scrooloose/nerdtree'
@@ -159,3 +160,16 @@ let g:ackprg = 'ag --vimgrep'
 " markdown plugin setup
 let g:vim_markdown_folding_disabled = 1
 
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+let g:ale_fixers: {
+\   'javascript': ['prettier', 'import-js'],
+\}
+let g:ale_fix_on_save = 1
