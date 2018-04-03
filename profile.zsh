@@ -35,4 +35,4 @@ source ~/.bin/tmuxinator.zsh
 # use ag(silver search) get file list and also include hidden files into search
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -f -g ""'
 
-source ./aliases.zsh
+source ~/dotfiles/aliases.zsh
