@@ -70,10 +70,9 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'pangloss/vim-javascript'
 Plugin 'w0rp/ale'
+Plugin 'galooshi/vim-import-js'
 Plugin 'mxw/vim-jsx'
 Plugin 'editorconfig/editorconfig-vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'tpope/vim-surround'
 
 Plugin 'SirVer/ultisnips'
@@ -160,16 +159,9 @@ let g:ackprg = 'ag --vimgrep'
 " markdown plugin setup
 let g:vim_markdown_folding_disabled = 1
 
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
 let g:ale_fixers = {
-\   'javascript': ['prettier', 'import-js'],
+\   'javascript': ['prettier', 'importjs'],
 \}
-let g:ale_fix_on_save = 1
+
+"au! BufWritePre *.jsx %!prettier --write --no-semi --single-quote --trailing-comma 'all'
+"au! BufWritePre *.jsx %!prettier --write --no-semi --single-quote --trailing-comma 'all'

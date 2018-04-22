@@ -1,0 +1,6 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_1='/Users/rydelw01/projects/goldfish/salary-prerender-service/src/profiles'
+let g:netrw_dirhist_2='/Users/rydelw01/projects/goldfish/salary-prerender-service/src'
+let g:netrw_dirhist_3='/Users/rydelw01/projects/goldfish/salary-prerender-service'
+let g:netrw_dirhist_4='/Users/rydelw01/.npm'
