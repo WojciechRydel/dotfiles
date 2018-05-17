@@ -9,7 +9,9 @@ export EDITOR=vim
 
 #GOLANG
 export GOPATH=$HOME/go
+export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin
 
 
 # notes
@@ -36,3 +38,5 @@ source ~/.bin/tmuxinator.zsh
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -f -g ""'
 
 source ~/dotfiles/aliases.zsh
+
+alias vgo='vim -u ~/.vimrc.go'

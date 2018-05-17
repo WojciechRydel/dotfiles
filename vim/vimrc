@@ -24,7 +24,9 @@ set shiftwidth=4
 set expandtab
 set clipboard=unnamed
 set backspace=indent,eol,start
-colorscheme turtles
+set foldmethod=syntax
+let javaScript_fold=1
+set foldlevelstart=99
 
 " --- PERSISTENT HISTORY ---
 set undofile
@@ -89,8 +91,12 @@ Plugin 'plasticboy/vim-markdown'
 " distract free mode
 Plugin 'junegunn/goyo.vim'
 
-call vundle#end()
+Plugin 'crusoexia/vim-monokai'
 
+call vundle#end()
+colorscheme monokai
+set termguicolors
+let g:monokai_term_italic = 1
 filetype plugin on
 
 " GITGUTTER
@@ -160,7 +166,7 @@ let g:ackprg = 'ag --vimgrep'
 let g:vim_markdown_folding_disabled = 1
 
 let g:ale_fixers = {
-\   'javascript': ['prettier', 'importjs'],
+\   'javascript': ['prettier'],
 \}
 
 "au! BufWritePre *.jsx %!prettier --write --no-semi --single-quote --trailing-comma 'all'
