@@ -1,173 +1,20 @@
-" basic setup
-set nocompatible
-syntax enable
-set path+=**
-set wildmenu
-set number
-set relativenumber
-set cursorline
-set splitright
-set splitbelow
-let mapleader=','
-set ruler
-set colorcolumn=80
-set t_Co=256
-set noswapfile
-nnoremap Q <nop>
-set timeout
-set timeoutlen=3000
-set ttimeoutlen=100
-set autoindent
-set smartindent
-set tabstop=4
-set shiftwidth=4
-set expandtab
-set clipboard=unnamed
-set backspace=indent,eol,start
-set foldmethod=syntax
-let javaScript_fold=1
-set foldlevelstart=99
+source $DOTFILES/vim/basic.vimrc
+source $DOTFILES/vim/all_plugins.vimrc
 
-" --- PERSISTENT HISTORY ---
-set undofile
-set undodir=~/.vim/undodir
-au BufWritePre /tmp/* setlocal noundofile " do not trach file history for /tmp/
-" -------------------------
-
-set autoread
-
-set wildignore=*.pyc,*.orig
-" Use ctrl-[hjkl] to select the active split!
-nmap <silent> <c-k> :wincmd k<CR>
-nmap <silent> <c-j> :wincmd j<CR>
-nmap <silent> <c-h> :wincmd h<CR>
-nmap <silent> <c-l> :wincmd l<CR>
-
-nmap <silent> <leader>q :quit<CR>
-nmap <silent> <leader>w :write<CR>
-
-"----------- BASIC SETUP
-
-" autoremove trailing whitespaces on save
-autocmd BufWritePre * %s/\s\+$//e
-
-" VUNDLE
-filetype off
-
-set rtp+=$HOME/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-Plugin 'VundleVim/Vundle.vim'
-
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-haml'
-Plugin 'beigebrucewayne/Turtles'
-Plugin 'airblade/vim-gitgutter'
-
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-
-Plugin 'davidhalter/jedi-vim'
-Plugin 'Raimondi/delimitMate'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'pangloss/vim-javascript'
-Plugin 'w0rp/ale'
-Plugin 'galooshi/vim-import-js'
-Plugin 'mxw/vim-jsx'
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'tpope/vim-surround'
-
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plugin 'junegunn/fzf.vim'
-
-Plugin 'mileszs/ack.vim'
-
-" MARKDOWN plugins
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
-
-" distract free mode
-Plugin 'junegunn/goyo.vim'
-
-Plugin 'crusoexia/vim-monokai'
-
-call vundle#end()
 colorscheme monokai
-set termguicolors
 let g:monokai_term_italic = 1
-filetype plugin on
 
-" GITGUTTER
-"
-set updatetime=250
+source $DOTFILES/vim/config/plugins/airlane.vimrc
 
+source $DOTFILES/vim/shortcuts.vimrc
+source $DOTFILES/vim/config/autocommands.vimrc
 
-" POWERLINE
-let g:airline_theme='dark'
-let g:airline#extensions#branch#enabled=1
-let g:airline#extensions#tabline#enabled=1
-let g:airline#extensions#tagbar#enabled=1
-let g:airline_skip_empty_sections=1
-let g:airline#extensions#virtualenv#enabled=1
-let g:airline_powerline_fonts = 1
+source $DOTFILES/vim/config/plugins/jedi.vimrc
+source $DOTFILES/vim/config/plugins/nerd_tree.vimrc
+source $DOTFILES/vim/config/plugins/jsx.vimrc
+source $DOTFILES/vim/config/plugins/you_complete_me.vimrc
+source $DOTFILES/vim/config/plugins/util_snips.vimrc
+source $DOTFILES/vim/config/plugins/ack.vimrc
+source $DOTFILES/vim/config/plugins/vim_markdown.vimrc
+source $DOTFILES/vim/config/plugins/ale.vimrc
 
-
-
-" JEDI-VIM
-let g:jedi#auto_close_doc=1
-
-" NERDTREE
-nnoremap <F2> :NERDTreeToggle<CR>
-nnoremap <F3> :NERDTreeFind<CR>
-let NERDTreeIgnore=['\~$', '\.orig$', '\.pyc$', '__pycache__']
-
-" TAGBAR
-nnoremap <F9> :TagbarToggle<CR>
-
-" MARKDOWN
-au! BufRead,BufNewFile *.markdown set filetype=markdown
-au! BufRead,BufNewFile *.md       set filetype=markdown
-
-" JSON specyfic
-au! BufRead,BufNewFile *.json set textwidth=0
-
-" jsx
-let g:jsx_ext_required = 0
-
-" if !exists("g:ycm_semantic_triggers")
-"   let g:ycm_semantic_triggers = {}
-" endif
-" let g:ycm_semantic_triggers['typescript'] = ['.']
-
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
-
-" UltiSnips
-source $HOME/dotfiles/vim/utlisnips.vim
-source $HOME/dotfiles/vim/fugitive.vim
-
-nnoremap <C-P> :FZF<CR>
-nnoremap <leader>. :Tags<CR>
-nnoremap <leader>b :Gblame<CR>
-nnoremap <leader>f :NERDTreeFind<CR>
-nnoremap <leader>s :setlocal spell!<CR>
-
-set fileformats=unix,mac,dos
-
-autocmd! FileType python nnoremap <leader>x :terminal python3 %<CR>
-autocmd! FileType go nnoremap <silent> <leader>t :terminal go test<CR>
-
-" ack.vim - search
-let g:ackprg = 'ag --vimgrep'
-
-" markdown plugin setup
-let g:vim_markdown_folding_disabled = 1
-
-let g:ale_fixers = {
-\   'javascript': ['prettier'],
-\}
-
-"au! BufWritePre *.jsx %!prettier --write --no-semi --single-quote --trailing-comma 'all'
-"au! BufWritePre *.jsx %!prettier --write --no-semi --single-quote --trailing-comma 'all'

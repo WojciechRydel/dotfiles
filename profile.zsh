@@ -21,11 +21,11 @@ function vn {
 
 
 # TMUX
-HOME_SESSION=HOME
-if which tmux >/dev/null 2>&1; then
-    #if not inside a tmux session, and if no session is started, start a new session
-    test -z "$TMUX" && (tmux attach -t $HOME_SESSION || tmux new-session -s $HOME_SESSION)
-fi
+# HOME_SESSION=HOME
+# if which tmux >/dev/null 2>&1; then
+#     #if not inside a tmux session, and if no session is started, start a new session
+#     test -z "$TMUX" && (tmux attach -t $HOME_SESSION || tmux new-session -s $HOME_SESSION)
+# fi
 
 
 # tmuxinator autocomplete
@@ -40,3 +40,20 @@ export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -f -g ""'
 source ~/dotfiles/aliases.zsh
 
 alias vgo='vim -u ~/.vimrc.go'
+export DOTFILES=$HOME/dotfiles
+
+function npx() {
+    NPX_PATH=./node_modules/.bin
+
+    if [ ! -d $NPX_PATH ]; then
+        echo "no node_modules found"
+        return 1
+    fi
+
+    if [ ! -d $NPX_PATH/$1 ]; then
+        echo "'$1' is not installed!"
+        return 1
+    fi
+
+    $NPX_PATH/$1 ${@:2}
+}

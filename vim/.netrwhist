@@ -1,6 +1,11 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
-let g:netrw_dirhist_1='/Users/rydelw01/projects/goldfish/salary-prerender-service/src/profiles'
-let g:netrw_dirhist_2='/Users/rydelw01/projects/goldfish/salary-prerender-service/src'
-let g:netrw_dirhist_3='/Users/rydelw01/projects/goldfish/salary-prerender-service'
-let g:netrw_dirhist_4='/Users/rydelw01/.npm'
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/Users/rydelw01/projects/goldfish/salary-prerender-service/src/profiles/stepstone.de/widgets'
+let g:netrw_dirhist_2='/Users/rydelw01/projects/goldfish/salary-prerender-service/src/profiles/stepstone.de'
+let g:netrw_dirhist_3='/Users/rydelw01/projects/goldfish/salary-prerender-service/src/profiles'
+let g:netrw_dirhist_4='/Users/rydelw01/projects/goldfish/salary-prerender-service/src'
+let g:netrw_dirhist_5='/Users/rydelw01/projects/goldfish/salary-prerender-service'
+let g:netrw_dirhist_6='/Users/rydelw01/projects/goldfish/salary-prerender-service/node_modules'
+let g:netrw_dirhist_7='/Users/rydelw01/projects/goldfish/salary-prerender-service/node_modules/@stepstone'
+let g:netrw_dirhist_8='/Users/rydelw01/projects/goldfish/salary-prerender-service/node_modules/@stepstone/donut-autosuggest'
+let g:netrw_dirhist_9='/Users/rydelw01/projects/goldfish/salary-prerender-service/node_modules/@stepstone/donut-autosuggest/src'
