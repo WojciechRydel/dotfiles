@@ -57,3 +57,9 @@ function npx() {
 
     $NPX_PATH/$1 ${@:2}
 }
+
+# ssh proxy through lucy
+function start_proxy() {
+    ssh -D 8123 -f -C -q -N sammy@example.com -p 443
+}
+
