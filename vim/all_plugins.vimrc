@@ -39,6 +39,7 @@ Plugin 'plasticboy/vim-markdown'
 Plugin 'junegunn/goyo.vim'
 
 Plugin 'crusoexia/vim-monokai'
+Plugin 'scrooloose/nerdtree'
 
 call vundle#end()
 
