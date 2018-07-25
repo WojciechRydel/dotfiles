@@ -6,7 +6,7 @@ import re
 from subprocess import check_output
 
 
-BRANCH_RE = r'^(?P<issue_type>feature|ft|bfx|bugfix|tsk|task)/(?P<issue_id>[A-Za-z]+-\d+).*$'
+BRANCH_RE = r'^(?P<issue_type>feature|ft|bfx|bugfix|tsk|task|fault)/(?P<issue_id>[A-Za-z]+-\d+).*$'
 TYPE_MESSAGE = 'message'
 
 
