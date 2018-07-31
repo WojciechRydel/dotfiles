@@ -63,3 +63,15 @@ function start_proxy() {
     ssh -D 8123 -f -C -q -N sammy@example.com -p 443
 }
 
+function togif() {
+    file_path="$1"
+    file_name=`basename $file_path`
+    file_name="${file_name%.*}"
+    dir_name=`dirname $file_path`
+
+    output_path="${dir_name}/${file_name}.gif"
+
+    ffmpeg -i $file_path -r 20 $output_path >> /dev/null
+
+    echo "GIF created: ${output_path}"
+}
