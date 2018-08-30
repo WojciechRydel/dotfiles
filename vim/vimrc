@@ -17,4 +17,5 @@ source $DOTFILES/vim/config/plugins/util_snips.vimrc
 source $DOTFILES/vim/config/plugins/ack.vimrc
 source $DOTFILES/vim/config/plugins/vim_markdown.vimrc
 source $DOTFILES/vim/config/plugins/ale.vimrc
+source $DOTFILES/vim/config/plugins/mu_complete.vimrc
 
