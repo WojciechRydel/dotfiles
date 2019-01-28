@@ -75,3 +75,5 @@ function togif() {
 
     echo "GIF created: ${output_path}"
 }
+
+export PATH=$PATH:$HOME/dotfiles/bin
