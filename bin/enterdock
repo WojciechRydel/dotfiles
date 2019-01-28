@@ -1,0 +1,3 @@
+DOCKER_ID=`docker ps --format="{{.Names}} ::  {{.ID}}" | fzf | awk '{print $3}'`
+
+docker exec -it $DOCKER_ID sh
