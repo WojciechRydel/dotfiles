@@ -4,8 +4,11 @@ COMMIT_MSG_FILE=$1
 COMMIT_TYPE=$2
 COMMIT_HASH=$3
 
-BRANCH_NAME=$(git symbolic-ref --short HEAD)
+# in case of rebasing there is no symbolic ref for current HEAD
+# therefore we can abort further steps
+BRANCH_NAME=$(git symbolic-ref --short HEAD) || exit 0
 BRANCH_REGEX="^(feature|bugfix|task|fault)/([A-Za-z]+-[0-9]+).*$"
+TEMP_FILE=/tmp/commit
 
 meta_prefix() {
     case $1 in
@@ -38,6 +41,7 @@ if [[ $BRANCH_NAME =~ $BRANCH_REGEX ]]; then
 
     issue_marker="${prefix}: [${issue_number}]"
 
-    echo >> $COMMIT_MSG_FILE
-    echo $issue_marker >> $COMMIT_MSG_FILE
+    printf "\n\n${issue_marker}" > $TEMP_FILE
+    cat $COMMIT_MSG_FILE >> $TEMP_FILE
+    cat $TEMP_FILE > $COMMIT_MSG_FILE
 fi
