@@ -1,3 +1,5 @@
-DOCKER_ID=`docker ps --format="{{.Names}} ::  {{.ID}}" | fzf | awk '{print $3}'`
+#!/bin/bash
+
+DOCKER_ID=`docker ps --format="{{.Names}} ::  {{.ID}}" | fzf --preview="docker logs {3}"| awk '{print $3}'`
 
 docker exec -it $DOCKER_ID sh
