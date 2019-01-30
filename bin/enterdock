@@ -1,5 +1,10 @@
 #!/bin/bash
+set -e
 
 DOCKER_ID=`docker ps --format="{{.Names}} ::  {{.ID}}" | fzf --preview="docker logs {3}"| awk '{print $3}'`
+
+if [[ $DOCKER_ID == "" ]]; then
+    exit 0
+fi
 
 docker exec -it $DOCKER_ID sh
