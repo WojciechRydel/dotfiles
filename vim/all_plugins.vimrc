@@ -42,6 +42,20 @@ Plugin 'crusoexia/vim-monokai'
 Plugin 'scrooloose/nerdtree'
 Plugin 'lifepillar/vim-mucomplete'
 
+" --- Typescript --------------------------------------
+" ** syntax
+Plugin 'leafgarland/typescript-vim'
+" ** DOM keywords
+Plugin 'HerringtonDarkholme/yats.vim'
+" ** language service tool
+Plugin 'Quramy/tsuquyomi'
+" ** TSX
+Plugin 'ianks/vim-tsx'
+" --- Typescript --------------------------------------
+"
+
+Plugin 'scrooloose/nerdcommenter'
+
 call vundle#end()
 
 filetype plugin on

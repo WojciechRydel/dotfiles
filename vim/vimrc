@@ -1,8 +1,7 @@
 source $DOTFILES/vim/basic.vimrc
 source $DOTFILES/vim/all_plugins.vimrc
 
-colorscheme monokai
-let g:monokai_term_italic = 1
+colorscheme turtles
 
 source $DOTFILES/vim/config/plugins/airlane.vimrc
 
@@ -18,4 +17,5 @@ source $DOTFILES/vim/config/plugins/ack.vimrc
 source $DOTFILES/vim/config/plugins/vim_markdown.vimrc
 source $DOTFILES/vim/config/plugins/ale.vimrc
 source $DOTFILES/vim/config/plugins/ale.vimrc
+source $DOTFILES/vim/config/plugins/typescript.vimrc
 
