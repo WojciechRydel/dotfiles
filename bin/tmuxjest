@@ -1,0 +1,26 @@
+#!/bin/bash
+set -e
+
+LINE=$1
+FILE_PATH=$2
+
+ACTIVE_SESSION=$(tmux display-message -p '#S')
+TESTS_PANE="${ACTIVE_SESSION}:1.2"
+PANE_PID="$(tmux list-panes -t PRERE -F '#{pane_index} #{pane_pid}' | awk '/^2/ { print $2 }')"
+PANE_SUB_PIDS=$(ps -axf | awk -v ppid=$PANE_PID '{ if ($3 == ppid) print $2 }') || ""
+
+TEST_NAME_REGEX="^.*'(.*)'.*$"
+
+if [[ $LINE =~ $TEST_NAME_REGEX ]]; then
+    test_name=${BASH_REMATCH[1]}
+
+    if [ -n "$PANE_SUB_PIDS" ]; then
+        kill -9 $PANE_SUB_PIDS
+    else
+        tmux send-keys -t "${TESTS_PANE}" C-c
+    fi
+
+    tmux send-keys -t "${TESTS_PANE}" \
+        "yarn test --watch --testNamePattern='${test_name[*]}' --runTestsByPath ${FILE_PATH}" \
+         Enter
+fi
