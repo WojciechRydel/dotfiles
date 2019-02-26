@@ -3,7 +3,6 @@ syntax enable
 set path+=**
 set wildmenu
 set number
-set relativenumber
 set cursorline
 set splitright
 set splitbelow
@@ -24,8 +23,8 @@ set expandtab
 set clipboard=unnamed
 set backspace=indent,eol,start
 set foldmethod=syntax
-let javaScript_fold=1
 set foldlevelstart=99
+let javaScript_fold=99
 set fileformats=unix,mac,dos
 
 " --- PERSISTENT HISTORY ---
