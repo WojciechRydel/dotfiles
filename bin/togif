@@ -1,0 +1,15 @@
+#!/bin/bash
+set -e
+
+FRAME_RATE=20
+
+file_path="$1"
+file_name=$(basename $file_path)
+file_name="${file_name%.*}"
+dir_name=$(dirname $file_path)
+
+output_path="${dir_name}/${file_name}.gif"
+
+ffmpeg -i $file_path -r $FRAME_RATE $output_path >> /dev/null
+
+echo "GIF created: ${output_path}"
