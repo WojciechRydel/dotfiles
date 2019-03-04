@@ -1,8 +1,3 @@
-export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/Devel
-source /usr/local/bin/virtualenvwrapper.sh
-
 export PATH=$PATH:$HOME/bin:$HOME/Library/Python/3.6/bin
 
 export EDITOR=vim
