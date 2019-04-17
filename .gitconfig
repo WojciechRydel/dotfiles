@@ -27,3 +27,5 @@
       cmd = /usr/bin/icdiff --line-numbers $LOCAL $REMOTE | less
 [rerere]
     enabled = true
+[push]
+    followTag = true
