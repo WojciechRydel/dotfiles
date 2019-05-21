@@ -25,7 +25,7 @@ function vn {
 
 # tmuxinator autocomplete
 
-source ~/.bin/tmuxinator.zsh
+source ~/dotfiles/tmux/tmuxinator.zsh
 
 
 # fzf default command
