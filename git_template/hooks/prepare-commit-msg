@@ -15,7 +15,7 @@ meta_prefix() {
         feature)
             echo "Adds"
             ;;
-        bugfix|fault)
+        bugfix|fault|fix)
             echo "Fixes"
             ;;
         task)
