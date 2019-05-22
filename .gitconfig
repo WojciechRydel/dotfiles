@@ -16,6 +16,7 @@
     stats=shortlog -sn
     purge=! git branch -D $1 && git push -d origin $1
     deltag = !~/dotfiles/scripts/delete_git_tag
+    newbranch = !~/dotfiles/scripts/new_git_branch
 [commit]
     gpgsign=true
 
