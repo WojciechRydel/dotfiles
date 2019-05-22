@@ -15,6 +15,7 @@
     srebase = rebase -S
     stats=shortlog -sn
     purge=! git branch -D $1 && git push -d origin $1
+    deltag = !~/dotfiles/scripts/delete_git_tag
 [commit]
     gpgsign=true
 

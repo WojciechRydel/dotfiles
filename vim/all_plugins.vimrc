@@ -56,6 +56,8 @@ Plugin 'ianks/vim-tsx'
 
 Plugin 'scrooloose/nerdcommenter'
 
+Plugin 'styled-components/vim-styled-components'
+
 call vundle#end()
 
 filetype plugin on
