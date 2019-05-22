@@ -39,7 +39,12 @@ if [[ $BRANCH_NAME =~ $BRANCH_REGEX ]]; then
 
     prefix=$(meta_prefix $issue_type)
 
-    issue_marker="${prefix}: [${issue_number}]"
+    if [ -z $prefix ]; then
+        issue_marker="${prefix}: [${issue_number}]"
+    else
+        issue_marker="[${issue_number}]"
+    fi
+
 
     printf "\n\n${issue_marker}" > $TEMP_FILE
     cat $COMMIT_MSG_FILE >> $TEMP_FILE
