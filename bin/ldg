@@ -6,6 +6,12 @@ function fuzzy_search() {
 date=$(date +%Y-%m-%d)
 year=$(date +%Y)
 month=$(date +%m)
+printf "Set date (default: $date): "
+read transaction_date
+
+if [ -z $transaction_date ]; then
+    transaction_date=$date
+fi
 
 printf "Choose a payee: "
 payee=$(ledger payees| fuzzy_search)
@@ -24,7 +30,7 @@ from=$(cat ~/Dropbox/ledger/meta.ldg | awk '{print $2}' | fuzzy_search)
 printf "Select destination: "
 to=$(cat ~/Dropbox/ledger/meta.ldg | awk '{print $2}' | fuzzy_search)
 
-transaction=$(printf "$date * $payee\n    $to    $amount\n    $from\n\n")
+transaction=$(printf "$transaction_date * $payee\n    $to    $amount\n    $from\n\n")
 
 printf "Transaction: \n\n"
 printf "$transaction"
