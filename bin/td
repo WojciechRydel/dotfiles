@@ -1,0 +1,44 @@
+#!/bin/bash
+project="$1"
+
+filter=""
+
+if [[ project != "" ]]; then
+    filter="project:$project"
+fi
+
+action=""
+cmd="task $filter next"
+
+if [[ $project != "" ]]; then
+    title="Todos of project [ $project ]"
+else
+    title="Todos"
+fi
+
+
+while [[ ture ]]; do
+    clear
+    printf "$title \n"
+
+    $cmd
+
+    printf "[todo]$: "
+    read action
+
+    case $action in
+        q )
+            clear
+            exit 0
+            ;;
+        /* )
+            cmd="task $filter next $action"
+            ;;
+        "" )
+            cmd="task $filter next"
+            ;;
+        * )
+            cmd="task $filter $action"
+            ;;
+    esac
+done
