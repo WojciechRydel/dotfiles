@@ -1,0 +1,52 @@
+#!/bin/bash
+function fuzzy_search() {
+    fzf --exit-0 --height 20 --layout reverse
+}
+
+function multi_fuzzy_search() {
+    fzf --exit-0 --height 20 --layout reverse
+}
+
+date=$(date +%Y-%m-%d)
+year=$(date +%Y)
+month=$(date +%m)
+printf "Set date (default: $date): "
+read transaction_date
+
+if [ -z $transaction_date ]; then
+    transaction_date=$date
+fi
+
+printf "Choose a payee: "
+payee=$(ledger payees| fuzzy_search)
+
+if [ -z "$payee" ]; then
+    printf "Add a payee: "
+    read -r payee
+fi
+
+printf "Amount: "
+read -r amount
+
+printf "Select source: "
+from=$(cat ~/Dropbox/ledger/meta.ldg | awk '{print $2}' | fuzzy_search)
+
+printf "Select destination: "
+to=$(cat ~/Dropbox/ledger/meta.ldg | awk '{print $2}' | fuzzy_search)
+
+printf "Select tags:"
+tags=$(ledger tags | mulit_fuzzy_search)
+
+transaction=$(printf "$transaction_date * $payee\n    $to    $amount\n    $from\n\n")
+
+printf "Transaction: \n\n"
+printf "$transaction"
+
+
+printf "\n\nIs it ok? [y/n]: "
+
+read ok
+
+if [ $ok == "y" ]; then
+    printf "$transaction\n\n" >> ~/Dropbox/ledger/$year/$month.ldg
+fi
