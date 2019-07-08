@@ -17,9 +17,11 @@ set timeoutlen=3000
 set ttimeoutlen=100
 set autoindent
 set smartindent
-set tabstop=4
-set shiftwidth=4
-set expandtab
+
+" set tab width and indentination as 2 spaces
+set tabstop=2
+set shiftwidth=2
+
 set clipboard=unnamed
 set backspace=indent,eol,start
 set foldmethod=syntax
