@@ -1,3 +1,5 @@
+[init]
+    templateDir = ~/dotfiles/git_template
 [user]
     name = Wojciech Rydel
     email = rydel.wojciech@gmail.com
