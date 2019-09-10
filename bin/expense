@@ -29,15 +29,19 @@ printf "Amount: "
 read -r amount
 
 printf "Select source: "
-from=$(cat ~/Dropbox/ledger/meta.ldg | awk '{print $2}' | fuzzy_search)
+from=$(ledger accounts Assets | fuzzy_search)
 
 printf "Select destination: "
-to=$(cat ~/Dropbox/ledger/meta.ldg | awk '{print $2}' | fuzzy_search)
+to=$(ledger accounts Expenses | fuzzy_search)
 
 printf "Select tags:"
-tags=$(ledger tags | mulit_fuzzy_search)
+tag=$(ledger tags | fuzzy_search)
 
 transaction=$(printf "$transaction_date * $payee\n    $to    $amount\n    $from\n\n")
+
+if [ ! -z "$tag" ]; then
+  transaction=$(printf "${transaction}\n      ; :${tag}:")
+fi
 
 printf "Transaction: \n\n"
 printf "$transaction"
