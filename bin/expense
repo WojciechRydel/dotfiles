@@ -29,10 +29,10 @@ printf "Amount: "
 read -r amount
 
 printf "Select source: "
-from=$(ledger accounts Assets | fuzzy_search)
+from=$(ledger accounts Zasoby | fuzzy_search)
 
 printf "Select destination: "
-to=$(ledger accounts Expenses | fuzzy_search)
+to=$(ledger accounts Wydatki | fuzzy_search)
 
 printf "Select tags:"
 tag=$(ledger tags | fuzzy_search)
@@ -47,10 +47,12 @@ printf "Transaction: \n\n"
 printf "$transaction"
 
 
-printf "\n\nIs it ok? [y/n]: "
+printf "\n\nIs it ok? [Y/n]: "
 
 read ok
 
-if [ $ok == "y" ]; then
+ok=${ok:-Y}
+
+if [ $ok == "Y" ]; then
     printf "$transaction\n\n" >> ~/Dropbox/ledger/$year/$month.ldg
 fi
