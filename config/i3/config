@@ -173,7 +173,7 @@ set $transparent #00000000
 bar {
     tray_output primary
     font pango:Ubuntu Mono Regular 13
-	status_command i3blocks
+	status_command i3status
 	position top
 	mode dock
 }
