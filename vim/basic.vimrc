@@ -48,3 +48,8 @@ set autoread
 set wildignore=*.pyc,*.orig
 
 set updatetime=250
+
+" spell checking and grammar
+"
+set thesaurus+=$HOME/.vim/thesaurus
+autocmd FileType markdown asciidoc setlocal spell
