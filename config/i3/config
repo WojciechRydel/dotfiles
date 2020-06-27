@@ -204,3 +204,4 @@ assign [class="Google-chrome"] $workspace1
 exec --no-startup-id feh --bg-scale ~/Photos/wallpaper.jpg
 # exec --no-startup-id xrandr --output LVDS-1 --off
 exec --no-startup-id setxkbmap -layout pl
+exec --no-startup-id nm-applet
