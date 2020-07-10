@@ -24,7 +24,7 @@ font pango:System San Francisco Display 14
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec termite
+bindsym $mod+Return exec st
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -87,13 +87,13 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
-set $workspace1 "1: "
-set $workspace2 "2: "
-set $workspace9 "9: "
+set $workspace1 "1"
+set $workspace2 "2"
+set $workspace9 "9"
 
-# switch to workspace
-bindsym $mod+1 workspace $workspace1
-bindsym $mod+2 workspace $workspace2
+# switch to workspace bindsym $mod+1 workspace $workspace1 bindsym $mod+2 workspace $workspace2 bindsym $mod+3 workspace 3
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
 bindsym $mod+3 workspace 3
 bindsym $mod+4 workspace 4
 bindsym $mod+5 workspace 5
@@ -205,3 +205,5 @@ exec --no-startup-id feh --bg-scale ~/Photos/wallpaper.jpg
 # exec --no-startup-id xrandr --output LVDS-1 --off
 exec --no-startup-id setxkbmap -layout pl
 exec --no-startup-id nm-applet
+
+bindsym $mod+b exec firefox-developer-edition

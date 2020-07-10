@@ -10,7 +10,7 @@
 [alias]
     st = status
     ci = commit -S
-    fixup = commit -S --amend --no-edit
+    fixup = commit --amend --no-edit
     slog = log --show-signature
     stag = tag -s
     smerge = merge -S
@@ -22,7 +22,7 @@
     fcheck = !~/dotfiles/fuzzy_checkout.zsh
     mrebase = !git stash -u && git checkout master && git pull && git checkout - && git rebase master
 [commit]
-    gpgsign=true
+    gpgsign=false
 
 [diff]
     tool = icdiff
@@ -37,3 +37,5 @@
     followTags = true
 [help]
     autoCorrect = -1
+[gpg]
+	program = gpg2
