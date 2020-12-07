@@ -1,0 +1,12 @@
+#!/bin/bash
+set -e
+
+stashEntry=$(git stash list | fzf | awk -F: '{ print $1 }')
+
+if [[ $stashEntry == "" ]]
+then
+  exit 0
+fi
+
+git stash apply ${stashEntry}
+
