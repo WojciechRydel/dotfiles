@@ -41,6 +41,8 @@ Plugin 'scrooloose/nerdcommenter'
 
 Plugin 'styled-components/vim-styled-components'
 
+Plugin 'ledger/vim-ledger'
+
 call vundle#end()
 
 filetype plugin on

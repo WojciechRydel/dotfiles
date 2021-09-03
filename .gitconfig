@@ -39,4 +39,4 @@
 [help]
     autoCorrect = -1
 [gpg]
-	program = gpg2
+	program = gpg
