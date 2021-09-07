@@ -5,4 +5,5 @@ autoload/
 *.db
 *.cmdline
 .DS_Store
+history.search
 
