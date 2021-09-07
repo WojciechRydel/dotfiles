@@ -1,2 +1,7 @@
 http://blog.cleancoder.com/atom.xml
-https://www.python.org/dev/peps/peps.rss  tech python
+https://www.python.org/dev/peps/peps.rss "tech" "python"
+https://martinfowler.com/feed.atom
+https://gitlab.com/muttmua/mutt/commits/master\?format\=atom
+https://nodejs.org/en/feed/blog.xml
+https://nodejs.org/en/feed/releases.xml
+https://nodejs.org/en/feed/vulnerability.xml
