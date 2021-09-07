@@ -1,1 +1,2 @@
 browser "open %u"
+auto-reload yes
