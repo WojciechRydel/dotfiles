@@ -10,6 +10,6 @@ nmap <silent> <leader>w :write<CR>
 
 nnoremap <C-P> :FZF<CR>
 nnoremap <leader>. :Tags<CR>
-nnoremap <leader>b :Gblame<CR>
+nnoremap <leader>b :Git blame<CR>
 nnoremap <leader>f :NERDTreeFind<CR>
 nnoremap <leader>s :setlocal spell!<CR>
