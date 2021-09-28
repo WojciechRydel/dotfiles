@@ -7,3 +7,5 @@ autoload/
 .DS_Store
 history.search
 
+newsboat/queue
+*.pid
