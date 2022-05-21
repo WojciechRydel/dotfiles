@@ -13,5 +13,7 @@ set imap_check_subscribed
 unset imap_passive
 set imap_keepalive=300
 
+# default account - GMAIL
+source ~/dotfiles/mutt/gmail.conf
 # macro to handle urls in message using urlview
 macro index \cb |urlview\n 'call urlview to extract URLs out of a message'

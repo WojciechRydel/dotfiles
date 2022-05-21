@@ -23,7 +23,7 @@
     fstash = !~/dotfiles/git-fstash
     mrebase = !git stash -u && git checkout master && git pull && git checkout - && git rebase master
 [commit]
-    gpgsign=true
+    gpgsign=false
 
 [merge]
   tool = vimdiff
