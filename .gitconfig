@@ -25,6 +25,13 @@
 [commit]
     gpgsign=true
 
+[merge]
+  tool = vimdiff
+  conflictstyle = diff3
+
+[mergetool]
+  prompt = false
+
 [diff]
     tool = icdiff
     indentHeuristic = on
