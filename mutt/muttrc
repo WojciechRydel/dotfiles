@@ -16,7 +16,8 @@ alternative_order text/plain text/html
 
 set editor=vim
 
-# default account - GMAIL
-source ~/dotfiles/mutt/gmail.conf
+# accounts
+source $HOME/.mutt/accounts/rydel.wojciech@gmail.com
+
 # macro to handle urls in message using urlview
 macro index \cb |urlview\n 'call urlview to extract URLs out of a message'
