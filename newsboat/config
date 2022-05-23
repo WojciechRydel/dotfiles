@@ -1,4 +1,4 @@
-browser "open %u"
+browser "firefox -new-tab %u"
 auto-reload yes
 bind-key j down
 bind-key k up
