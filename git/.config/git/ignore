@@ -3,3 +3,4 @@
 .npmrc
 *.pyc
 *.egg*
+tags
