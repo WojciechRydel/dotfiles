@@ -16,9 +16,6 @@
     srebase = rebase -S
     stats=shortlog -sn
     purge=! git branch -D $1 && git push -d origin $1
-    deltag = !~/dotfiles/scripts/delete_git_tag
-    newbranch = !~/dotfiles/scripts/new_git_branch
-    fcheck = !~/dotfiles/fuzzy_checkout.zsh
     mrebase = !git stash -u && git checkout master && git pull && git checkout - && git rebase master
 [commit]
     gpgsign=true
