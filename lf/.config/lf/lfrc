@@ -1,2 +1,6 @@
 set hidden on
-map gp cd ~/projects
+set drawbox
+
+map gg cd ~/github.com
+map gr cd /
+map gd cd ~/docs
