@@ -3,6 +3,6 @@ title="Git log for < $1 > package"
 package=$1
 
 git log --no-merges --pretty=format:"hash: %h %nauthor: %aN%nsubject: %s%n%b" -- packages/$package| \
-    awk -v log_title="$title" -f ~/.config/.git/mrlog-commit.awk |\
+    awk -v log_title="$title" -f ~/.config/git/mrlog-commit.awk |\
     column | \
     less
