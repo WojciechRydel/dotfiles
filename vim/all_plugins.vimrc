@@ -12,7 +12,6 @@ Plugin 'airblade/vim-gitgutter'
 
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-
 Plugin 'Raimondi/delimitMate'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'w0rp/ale'
@@ -42,6 +41,11 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'styled-components/vim-styled-components'
 
 Plugin 'ledger/vim-ledger'
+
+" Typescript
+Plugin 'pangloss/vim-javascript'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'maxmellon/vim-jsx-pretty'
 
 call vundle#end()
 
