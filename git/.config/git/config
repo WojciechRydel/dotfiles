@@ -1,11 +1,10 @@
 [init]
-    templateDir = ~/dotfiles/git_template
+    templateDir = ~/.config/git/templatedir
 [user]
     name = Wojciech Rydel
     email = rydel.wojciech@gmail.com
     signingkey = 45D9F6F98EC117B7FA01D3BD9B8BEF4DE4421E47
 [core]
-    excludesfile = $HOME/.gitignore_global
     editor = vim
 [alias]
     st = status
@@ -35,10 +34,16 @@
 [diff]
     tool = icdiff
     indentHeuristic = on
+
 [difftool]
-      prompt = false
+      prompt = true
+
 [difftool "icdiff"]
       cmd = /usr/bin/icdiff --line-numbers $LOCAL $REMOTE | less
+
+[diff "image"]
+    cmd = compare $REMOTE $LOCAL png:- | montage -geometry 400x -font Liberation-Sans -label "reference" $LOCAL -label "diff" - -label "current--%f" $REMOTE x:
+
 [rerere]
     enabled = true
 [push]
