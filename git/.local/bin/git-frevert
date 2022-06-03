@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+COMMIT_HASH=$(git log --oneline | fzf --ansi | awk '{print $1}')
+
+if [[ -z "${COMMIT_HASH}" ]]
+then
+  exit 0
+fi
+
+git revert $COMMIT_HASH
