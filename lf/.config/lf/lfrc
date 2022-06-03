@@ -1,6 +1,10 @@
+set ratios 1:2:3
+set cleaner ~/.config/lf/cleaner
+set previewer ~/.config/lf/preview
 set hidden on
 set drawbox
 
-map gg cd ~/github.com
 map gr cd /
 map gd cd ~/docs
+map gp cd ~/projects
+map D delete
