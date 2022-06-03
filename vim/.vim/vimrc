@@ -1,0 +1,21 @@
+source ~/.vim/basic.vimrc
+source ~/.vim/all_plugins.vimrc
+
+colorscheme turtles
+
+source ~/.vim/config/plugins/airlane.vimrc
+
+source ~/.vim/shortcuts.vimrc
+source ~/.vim/config/autocommands.vimrc
+
+source ~/.vim/config/plugins/jedi.vimrc
+source ~/.vim/config/plugins/nerd_tree.vimrc
+source ~/.vim/config/plugins/jsx.vimrc
+source ~/.vim/config/plugins/you_complete_me.vimrc
+source ~/.vim/config/plugins/util_snips.vimrc
+source ~/.vim/config/plugins/ack.vimrc
+source ~/.vim/config/plugins/vim_markdown.vimrc
+source ~/.vim/config/plugins/ale.vimrc
+source ~/.vim/config/plugins/ale.vimrc
+source ~/.vim/config/plugins/typescript.vimrc
+
