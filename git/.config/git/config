@@ -38,7 +38,7 @@
       cmd = /usr/bin/icdiff --line-numbers $LOCAL $REMOTE | less
 
 [diff "image"]
-    command = echo "$REMOTE"
+    command = git-img-diff
 
 [rerere]
     enabled = true

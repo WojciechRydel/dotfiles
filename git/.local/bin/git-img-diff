@@ -1,0 +1,10 @@
+#!/usr/bin/bash
+FILE_PATH="$1"
+OLD_FILE_PATH="$2"
+NEW_FILE_PATH="$5"
+
+
+compare $OLD_FILE_PATH $FILE_PATH png:- \
+  | montage -geometry +4+4 $OLD_FILE_PATH - $FILE_PATH png:- \
+  | display -title "$1" -
+
