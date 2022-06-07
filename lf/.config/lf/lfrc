@@ -1,6 +1,6 @@
 set ratios 1:2:3
-set cleaner ~/.config/lf/cleaner
-set previewer ~/.config/lf/preview
+set cleaner ~/.config/lf/kitty_clean
+set previewer ~/.config/lf/kitty_preview
 set hidden on
 set drawbox
 
