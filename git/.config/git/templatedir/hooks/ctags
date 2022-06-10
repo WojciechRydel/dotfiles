@@ -1,15 +1,18 @@
 #!/bin/sh
 set -e
-# PATH="/usr/local/bin:$PATH"
-dir="`git rev-parse --git-dir`"
-trap 'rm -f "$dir/$$.tags"' EXIT
+
+TMP_TAGS=/tmp/tags
+LOCAL_TAGS="${PWD}/.tags"
+
 git ls-files | \
-  ctags --tag-relative -L - -f"$dir/$$.tags"
+  ctags -L - -f "${TMP_TAGS}"
 
 if [ -n $VIRTUAL_ENV ]
 then
   find $VIRTUAL_ENV/lib/python* -name "*.py" | \
-  ctags --exclude="**/IPython/*" --tag-relative -L - --append=yes -f"$dir/$$.tags"
+    ctags --exclude="**/IPython/*" -L - \
+      --append=yes \
+      -f "${TMP_TAGS}"
 fi
-mv "$dir/$$.tags" "$dir/tags"
+mv "${TMP_TAGS}" "${LOCAL_TAGS}"
 

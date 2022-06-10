@@ -53,3 +53,5 @@ set updatetime=250
 "
 set thesaurus+=$HOME/.vim/thesaurus
 autocmd FileType markdown asciidoc setlocal spell
+
+set tags=./tags,./.tags,./.git/tags
