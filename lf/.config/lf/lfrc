@@ -3,6 +3,7 @@ set cleaner ~/.config/lf/kitty_clean
 set previewer ~/.config/lf/kitty_preview
 set hidden on
 set drawbox
+set info size:time
 
 map gr cd /
 map gd cd ~/docs
