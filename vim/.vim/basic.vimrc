@@ -7,6 +7,7 @@ set cursorline
 set splitright
 set splitbelow
 let mapleader=','
+let maplocalleader=','
 set ruler
 set colorcolumn=80
 set t_Co=256

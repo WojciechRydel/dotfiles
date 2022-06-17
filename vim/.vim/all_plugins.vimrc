@@ -47,6 +47,12 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'maxmellon/vim-jsx-pretty'
 
+" todo.txt
+Plugin 'freitass/todo.txt-vim'
+
+" spellchecker
+Plugin 'dpelle/vim-LanguageTool'
+
 call vundle#end()
 
 filetype plugin on
