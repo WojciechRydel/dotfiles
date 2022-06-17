@@ -1,0 +1,9 @@
+[Unit]
+Description=Newsboat Timer
+
+[Timer]
+OnBootSec=1m
+OnUnitInactiveSec=1h
+
+[Install]
+WantedBy=default.target

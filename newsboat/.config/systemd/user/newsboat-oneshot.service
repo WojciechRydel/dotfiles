@@ -1,0 +1,11 @@
+[Unit]
+Description=Newsboat Service (oneshot)
+Documentation=man:newsboat(1)
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/newsboat -x reload
+TimeoutStopSec=120
+
+[Install]
+WantedBy=default.target
