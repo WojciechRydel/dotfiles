@@ -1,3 +1,0 @@
-setxkbmap -option caps:escape &
-
-
