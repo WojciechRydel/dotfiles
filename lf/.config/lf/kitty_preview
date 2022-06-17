@@ -5,7 +5,10 @@ h=$3
 x=$4
 y=$5
 
-if [[ "$( file -Lb --mime-type "$file")" =~ ^image ]]; then
+
+mimetype=$(file -Lb --mime-type $1)
+
+if [[ "${mimetype}" =~ ^image ]]; then
     kitty +icat --silent --transfer-mode file --place "${w}x${h}@${x}x${y}" "$file"
     exit 1
 fi
