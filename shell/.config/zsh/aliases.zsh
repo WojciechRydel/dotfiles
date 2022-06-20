@@ -1,3 +1,4 @@
+echo "aliases"
 alias v=vim
 alias led="ledger -f $HOME/ledger/main.ldg --strict"
 alias vldg="vim $HOME/ledger/journal.ldg -O $HOME/ledger/accounts.ldg +"

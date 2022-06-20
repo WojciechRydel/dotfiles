@@ -1,5 +1,6 @@
 export EDITOR=/usr/bin/vim
 export BROWSER=/home/voytech/.local/bin/firefox-dev
+echo "source profile"
 
 # Golang
 export GOPATH=$HOME/go
@@ -18,14 +19,7 @@ export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -f -g ""'
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-
-# Load pyenv-virtualenv automatically by adding
-# the following to ~/.bashrc:
-
-eval "$(pyenv virtualenv-init -)"
 
 export PATH=/home/voytech/.pyenv/plugins/pyenv-virtualenv/shims:/home/voytech/.pyenv/shims:/home/voytech/.pyenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/voytech/.local/bin
-
 
 source $ZDOTDIR/aliases.zsh
