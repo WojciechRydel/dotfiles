@@ -110,3 +110,4 @@ source $ZSH/oh-my-zsh.sh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 source "${ZDOTDIR:-HOME}/.p10k.zsh"
 
+source "${ZDOTDIR}/profile"
