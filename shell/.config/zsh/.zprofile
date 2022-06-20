@@ -23,3 +23,7 @@ command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 export PATH=/home/voytech/.pyenv/plugins/pyenv-virtualenv/shims:/home/voytech/.pyenv/shims:/home/voytech/.pyenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/voytech/.local/bin
 
 source $ZDOTDIR/aliases.zsh
+
+if [[ -d $ZDOTDIR/local ]]; then
+  for f in $ZDOTDIR/local/*; do source "${f}"; done
+fi
