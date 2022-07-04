@@ -1,9 +1,9 @@
 # vim:filetype=zsh
 
-echo "aliases"
 alias v=vim
 alias led="ledger -f $HOME/ledger/main.ldg --strict"
 alias vldg="vim $HOME/ledger/journal.ldg -O $HOME/ledger/accounts.ldg +"
 alias listen="mpv --no-video"
 alias news=newsboat
 alias mail=neomutt
+alias userctl='systemctl --user'
