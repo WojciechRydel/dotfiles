@@ -1,0 +1,47 @@
+# vim: filetype=neomuttrc
+set realname="Ou Rname"
+set sort='reverse-date'
+
+set use_from=yes
+set ssl_starttls=yes
+set ssl_force_tls=yes
+
+set editor="vim"
+set rfc2047_parameters = yes
+set sleep_time = 0    # Pause 0 seconds for informational messages
+set markers = no    # Disables the `+` displayed at line wraps
+set mark_old = no   # Unread mail stay unread until read
+set mime_forward = yes    # attachments are forwarded with mail
+set wait_key = no   # mutt won't ask "press key to continue"
+set fast_reply      # skip to compose when replying
+set fcc_attach      # save attachments with the body
+set forward_format = "Fwd: %s"  # format of subject when forwarding
+set forward_quote   # include message in forwards
+set reverse_name    # reply as whomever it was to
+set include     # include message in replies
+
+set sidebar_visible = yes
+set sidebar_width = 20
+set sidebar_short_path = yes
+set sidebar_next_new_wrap = yes
+set mail_check_stats
+set sidebar_format = '%B%?F? [%F]?%* %?N?%N/? %?S?%S?'
+set delete=ask-yes
+auto_view text/plain text/html image/*
+
+source $XDG_CONFIG_HOME/neomutt/colors.muttrc
+source $XDG_CONFIG_HOME/neomutt/shortcuts.muttrc
+
+source $XDG_CONFIG_HOME/neomutt/accounts/wojciech.rydel@adverity.com.muttrc
+folder-hook $folder 'source $XDG_CONFIG_HOME/neomutt/accounts/wojciech.rydel@adverity.com.muttrc'
+
+source $XDG_CONFIG_HOME/neomutt/accounts/wojciech@rydel.com.pl.muttrc
+folder-hook $folder 'source $XDG_CONFIG_HOME/neomutt/accounts/wojciech@rydel.com.pl.muttrc'
+
+source $XDG_CONFIG_HOME/neomutt/accounts/rydel.wojciech@gmail.com.muttrc
+folder-hook $folder 'source $XDG_CONFIG_HOME/neomutt/accounts/rydel.wojciech@gmail.com.muttrc'
+
+macro index,pager i1 '<sync-mailbox><enter-command>source $XDG_CONFIG_HOME/neomutt/accounts/rydel.wojciech@gmail.com.muttrc<enter><change-folder>!<enter>'
+macro index,pager i2 '<sync-mailbox><enter-command>source $XDG_CONFIG_HOME/neomutt/accounts/wojciech@rydel.com.pl.muttrc<enter><change-folder>!<enter>'
+macro index,pager i3 '<sync-mailbox><enter-command>source $XDG_CONFIG_HOME/neomutt/accounts/wojciech.rydel@adverity.com.muttrc<enter><change-folder>!<enter>'
+
