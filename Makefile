@@ -1,7 +1,11 @@
-PACKAGES=$(shell ls -d */)
+HOME_PACKAGES=$(shell find home/ -mindepth 1 -maxdepth 1 -type d -exec basename {} \;)
+ROOT_PACKAGES=$(shell find root/ -mindepth 1 -maxdepth 1 -type d -exec basename {} \;)
 
-all:
-	stow $(PACKAGES)
+home:
+	stow --dir=home --target=$(HOME) $(HOME_PACKAGES) 
 
-.PHONY: all
+root:
+	sudo stow --dir=root --target=/ $(ROOT_PACKAGES)
 
+
+.PHONY: home root
