@@ -1,12 +1,14 @@
 let g:ale_fixers = {
-\   'javascript': ['prettier'],
-\   'typescriptreact': ['prettier'],
+  \'typescript': ['eslint', 'prettier', 'tslint'],
+  \'typescriptreact': ['eslint', 'prettier', 'tslint'],
+  \'javascript': ['eslint', 'prettier'],
+  \'python': ['add_blank_lines_for_python_control_statements', 'autoflake', 'autoimport', 'autopep8', 'black', 'isort', 'reorder-python-imports', 'yapf']
 \}
 
 let g:ale_linters = {
-  \'typescript': ['eslint'],
-  \'typescriptreact': ['eslint'],
-  \'javascript': ['eslint'],
+  \'typescript': ['eslint', 'prettier', 'tslint'],
+  \'typescriptreact': ['eslint', 'prettier', 'tslint'],
+  \'javascript': ['eslint', 'prettier'],
 \}
 
 let g:ale_fix_on_save = 1

@@ -1,0 +1,16 @@
+# vim: filetype=neomuttrc
+unmailboxes *
+
+set realname = "Wojciech Rydel"
+set from = "wojciech@rydel.com.pl"
+set sendmail = "/usr/bin/msmtp -a wojciech@rydel.com.pl"
+
+set folder = "~/.mail/wojciech@rydel.com.pl/"
+set mbox_type = Maildir
+set spoolfile = "+INBOX"
+set postponed = "+Drafts"
+set trash = "+Trash"
+set record = "+Sent"
+set my_archive = "Archives"
+mailboxes =INBOX ="Sent" =Archives =Drafts
+

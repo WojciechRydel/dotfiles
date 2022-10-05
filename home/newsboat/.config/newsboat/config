@@ -1,4 +1,4 @@
-browser "firefox -new-tab %u"
+browser "$BROWSER -new-tab %u"
 bind-key j down
 bind-key k up
 
@@ -6,3 +6,8 @@ download-path "~/podcasts/%n"
 download-filename-format "%t.%e"
 max-downloads 5
 player mpv
+
+
+
+macro E set browser "echo %u >> ~/.newsboat/queue"
+
