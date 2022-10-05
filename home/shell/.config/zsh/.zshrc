@@ -111,3 +111,4 @@ source $ZSH/oh-my-zsh.sh
 source "${ZDOTDIR:-HOME}/.p10k.zsh"
 
 source "${ZDOTDIR}/profile"
+source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
