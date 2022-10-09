@@ -172,14 +172,13 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
-bindsym $mod+Shift+x exec i3lock
+bindsym $mod+Shift+x exec swaylock
 
 default_border pixel 3
 
 for_window [class="keepassxc"] floating enable, border normal, move scratchpad, scratchpad show
 
 for_window [class="Spotify"] move to workspace $workspace9
-assign [class="Google-chrome"] $workspace1
 
 exec --no-startup-id feh --bg-scale ~/Photos/wallpaper.jpg
 # exec --no-startup-id xrandr --output LVDS-1 --off
@@ -192,3 +191,13 @@ bindsym $mod+b exec $BROWSER
 input * {
   xkb_layout voytech
 }
+
+# monitors
+output DP-2 pos 0 0 mode 2560x1440@144Hz
+output DP-2 transform 270
+
+output DP-1 pos 1440 560 mode 3440x1440@120Hz
+
+output DP-3 pos 4880 0 mode 2560x1440@144Hz
+output DP-3 transform 90
+
