@@ -1,4 +1,3 @@
-ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
 TERMINAL=/usr/bin/kitty
 BROWSER=/usr/bin/firefox
 EDITOR=/usr/bin/vim

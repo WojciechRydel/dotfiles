@@ -4,8 +4,6 @@ set rtp+=$HOME/.vim/bundle/Vundle.vim
 
 call vundle#begin()
 
-Plugin 'VundleVim/Vundle.vim'
-
 Plugin 'tpope/vim-fugitive'
 Plugin 'beigebrucewayne/Turtles'
 Plugin 'airblade/vim-gitgutter'
