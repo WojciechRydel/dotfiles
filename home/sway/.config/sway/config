@@ -172,7 +172,7 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
-bindsym $mod+Shift+x exec swaylock
+bindsym $mod+Shift+x exec $HOME/.local/bin/screenlock
 
 default_border pixel 3
 

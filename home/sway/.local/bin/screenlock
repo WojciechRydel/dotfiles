@@ -1,0 +1,15 @@
+#!/usr/bin/bash
+DIR=/tmp/screenlock
+
+if [ ! -d "${DIR}"  ]; then
+  mkdir -p "${DIR}"
+fi
+
+OUTPUTS=$(swaymsg -t get_outputs -p | awk '/Output/ { print $2 }')
+
+xargs --max-proc=0 -I{} grim -o {} "${DIR}/{}.jpg" -t jpg <<< "${OUTPUTS[@]}"
+xargs --max-proc=0 -I{} convert "${DIR}/{}.jpg" -blur 0x5 "${DIR}/{}.jpg" <<< "${OUTPUTS[@]}"
+
+LOCKS=$(awk -v DIR=${DIR} '{ print "-i "$0 ":" DIR "/" $0 ".jpg " }' <<< "${OUTPUTS[@]}")
+
+swaylock $( IFS=$'\n'; echo "${LOCKS[*]}")
