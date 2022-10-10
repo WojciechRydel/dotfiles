@@ -1,11 +1,14 @@
 [init]
     templateDir = ~/.config/git/templatedir
+
 [user]
     name = Wojciech Rydel
     email = rydel.wojciech@gmail.com
     signingkey = 45D9F6F98EC117B7FA01D3BD9B8BEF4DE4421E47
+
 [core]
     editor = vim
+
 [alias]
     st = status
     ci = commit -S
@@ -17,35 +20,35 @@
     stats=shortlog -sn
     purge=! git branch -D $1 && git push -d origin $1
     mrebase = !git stash -u && git checkout master && git pull && git checkout - && git rebase master
+
 [commit]
-	gpgsign = false
-	gpgsing = false
+    gpgsign = true
 
 [merge]
-  tool = vimdiff
-  conflictstyle = diff3
+    tool = vimdiff
+    conflictstyle = diff3
 
 [mergetool]
-  prompt = false
+    prompt = false
 
 [diff]
     tool = icdiff
     indentHeuristic = on
 
 [difftool]
-      prompt = true
+    prompt = true
 
 [difftool "icdiff"]
-      cmd = /usr/bin/icdiff --line-numbers $LOCAL $REMOTE | less
+    cmd = /usr/bin/icdiff --line-numbers $LOCAL $REMOTE | less
 
 [diff "image"]
     command = git-img-diff
 
 [rerere]
     enabled = true
+
 [push]
     followTags = true
+
 [help]
     autoCorrect = -1
-[gpg]
-	program = gpg2
