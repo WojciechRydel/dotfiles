@@ -175,6 +175,9 @@ bindsym $mod+minus scratchpad show
 bindsym $mod+Shift+x exec $HOME/.local/bin/screenlock
 bindsym $mod+Shift+s exec systemctl suspend
 
+# screenshots
+bindsym $mod+Shift+Print exec grim -g "$(slurp)" - | wl-copy
+
 default_border pixel 3
 
 for_window [class="keepassxc"] floating enable, border normal, move scratchpad, scratchpad show
