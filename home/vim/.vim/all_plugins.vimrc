@@ -53,6 +53,8 @@ Plugin 'dpelle/vim-LanguageTool'
 
 Plugin 'davidhalter/jedi'
 
+Plugin 'aklt/plantuml-syntax'
+
 call vundle#end()
 
 filetype plugin on
