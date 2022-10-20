@@ -1,2 +1,2 @@
 export QT_QPA_PLATFORM=xcb
-
+export _JAVA_AWT_WM_NONREPARENTING=1
