@@ -1,11 +1,12 @@
-TERMINAL=/usr/bin/kitty
-BROWSER=/usr/bin/firefox
-EDITOR=/usr/bin/vim
+export TERMINAL=/usr/bin/kitty
+export BROWSER=/usr/bin/firefox
+export EDITOR=/usr/bin/vim
 
-
-# GnuPG
-SSH_AGENT_PID=""
-SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.ssh"
+if [ -d "${ZDOTDIR}/zsh.d" ]; then
+  for DROPIN_FILE in "${ZDOTDIR}"/zsh.d/* ; do
+    source "${DROPIN_FILE}"
+  done
+fi
 
 # Node Version Manager
 NVM_DIR="${XDG_DATA_HOME}/nvm"
