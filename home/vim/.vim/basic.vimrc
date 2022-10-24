@@ -33,7 +33,7 @@ set fileformats=unix,mac,dos
 
 " --- PERSISTENT HISTORY ---
 set undofile
-set undodir=~/.vim/undodir
+set undodir=$XDG_CACHE_HOME/vim/undo
 au BufWritePre /tmp/* setlocal noundofile " do not trach file history for /tmp/
 " -------------------------
 autocmd BufWritePre * %s/\s\+$//e
