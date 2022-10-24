@@ -114,3 +114,5 @@ source "${ZDOTDIR}/profile"
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 autoload -Uz compinit
 compinit
+
+setopt share_history
