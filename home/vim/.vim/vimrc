@@ -1,7 +1,7 @@
 source ~/.vim/basic.vimrc
 source ~/.vim/all_plugins.vimrc
 
-colorscheme turtles
+colorscheme monokai
 
 source ~/.vim/shortcuts.vimrc
 
