@@ -9,6 +9,7 @@ nmap <silent> <leader>w :write<CR>
 
 
 nnoremap <C-P> :FZF<CR>
+nnoremap <C-B> :Buffers<CR>
 nnoremap <leader>. :Tags<CR>
 nnoremap <leader>b :Git blame<CR>
 nnoremap <leader>f :NERDTreeFind<CR>
