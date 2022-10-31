@@ -1,0 +1,11 @@
+[Unit]
+Description=Udiskie Automount
+Documentation=man:Udiskie(1)
+
+[Service]
+ExecStart=/usr/sbin/udiskie
+Restart=on-failure
+RestartSec=60
+
+[Install]
+WantedBy=default.target
