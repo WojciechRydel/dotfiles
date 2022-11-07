@@ -8,6 +8,7 @@
 .npmrc
 .tags
 .vscode
+.python-version
 autoload/
 bundle/
 history.search
