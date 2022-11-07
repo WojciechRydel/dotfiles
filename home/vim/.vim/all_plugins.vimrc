@@ -3,7 +3,6 @@ filetype off
 set rtp+=$HOME/.vim/bundle/Vundle.vim
 
 call vundle#begin()
-
 Plugin 'tpope/vim-fugitive'
 Plugin 'beigebrucewayne/Turtles'
 Plugin 'airblade/vim-gitgutter'
