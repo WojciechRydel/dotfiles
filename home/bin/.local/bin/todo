@@ -1,1 +1,1 @@
-vim -c :Goyo ~/docs/todos/todo.txt
+vim -c ':Goyo 120' -c :$ ~/docs/todos/todo.txt
