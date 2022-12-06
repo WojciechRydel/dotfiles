@@ -16,3 +16,5 @@ newsboat/queue
 spell/
 tags
 undodir/
+venv/
+.env
