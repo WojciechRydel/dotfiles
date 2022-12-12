@@ -2,7 +2,7 @@ let g:ale_fixers = {
   \'typescript': ['eslint', 'prettier', 'tslint'],
   \'typescriptreact': ['eslint', 'prettier', 'tslint'],
   \'javascript': ['eslint', 'prettier'],
-  \'python': ['add_blank_lines_for_python_control_statements', 'autoflake', 'autoimport', 'autopep8', 'black', 'isort', 'reorder-python-imports', 'yapf']
+  \'python': ['autoflake', 'autoimport', 'autopep8', 'black', 'isort', 'reorder-python-imports', 'yapf']
 \}
 
 let g:ale_linters = {
