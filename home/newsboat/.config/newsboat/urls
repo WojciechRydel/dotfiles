@@ -2,11 +2,11 @@ http://blog.cleancoder.com/atom.xml
 https://www.python.org/dev/peps/peps.rss "tech" "python"
 https://martinfowler.com/feed.atom
 https://gitlab.com/muttmua/mutt/commits/master\?format\=atom "~Mutt"
-https://nodejs.org/en/feed/blog.xml
-https://inside.java/feed.xml
 https://feeds.feedburner.com/sekurak
-https://github.com/pi-hole/pi-hole/releases.atom "tools"
 https://feeds.simplecast.com/XA_851k3
 https://news.ycombinator.com/rss
 https://www.youtube.com/feeds/videos.xml?channel_id=UC2D2CMWXMOVWx7giW1n3LIg
-https://durmonski.com/feed/
+https://archlinux.org/feeds/news/
+https://youtube.com/feeds/videos.xml?channel_id=UC2D2CMWXMOVWx7giW1n3LIg "tech"
+https://youtube.com/feeds/videos.xml?channel_id=UCkC9YgH_FlqOhOIoTDFt4CA "news"
+https://youtube.com/feeds/videos.xml?channel_id=UCgo2BrI5xkXduYvYv6lskkg
