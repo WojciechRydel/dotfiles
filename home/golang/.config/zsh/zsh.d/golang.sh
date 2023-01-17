@@ -1,1 +1,1 @@
-export PATH="${PATH}:${GOPATH}/bin"
+export GOROOT=/usr/lib/go
