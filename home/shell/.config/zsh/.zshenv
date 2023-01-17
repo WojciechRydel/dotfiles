@@ -9,6 +9,3 @@ if [ -d "${ZDOTDIR}/zsh.d" ]; then
     source "${DROPIN_FILE}"
   done
 fi
-
-# Node Version Manager
-NVM_DIR="${XDG_DATA_HOME}/nvm"
