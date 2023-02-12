@@ -7,7 +7,7 @@ COMMIT_HASH=$3
 # in case of rebasing there is no symbolic ref for current HEAD
 # therefore we can abort further steps
 BRANCH_NAME=$(git symbolic-ref --short HEAD) || exit 0
-BRANCH_REGEX="^(feature|bugfix|task|fault|fix|hotfix)/([A-Za-z]+-[0-9]+).*$"
+BRANCH_REGEX="^(feature|bugfix|task|fault|fix|hotfix|poc)/([A-Za-z]+-[0-9]+).*$"
 TEMP_FILE=/tmp/commit
 
 meta_prefix() {
@@ -21,6 +21,9 @@ meta_prefix() {
         task)
             echo "Resolves"
             ;;
+        poc)
+          echo "POC"
+          ;;
     esac
 }
 
