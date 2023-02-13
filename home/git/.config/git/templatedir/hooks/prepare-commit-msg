@@ -42,7 +42,7 @@ if [[ $BRANCH_NAME =~ $BRANCH_REGEX ]]; then
 
     prefix=$(meta_prefix $issue_type)
 
-    if [ -z $prefix ]; then
+    if [ -n $prefix ]; then
         issue_marker="${prefix}: [${issue_number}]"
     else
         issue_marker="[${issue_number}]"
