@@ -21,6 +21,11 @@
     stats=shortlog -sn
     purge=! git branch -D $1 && git push -d origin $1
     mrebase = !git stash -u && git checkout master && git pull && git checkout - && git rebase master
+    fcheck = !$HOME/.local/bin/git-fcheck
+    deltag = !$HOME/.local/bin/git-deltag
+    frevert = !$HOME/.local/bin/git-frevert
+    fstash = !$HOME/.local/bin/git-fstash
+    newbranch = !$HOME/.local/bin/git-newbranch
 
 [commit]
     gpgsign = true
