@@ -1,6 +1,9 @@
 #!/bin/sh
 
-git checkout -b $1
-git push -u origin $1
+BRANCH_NAME="${1}"
+SOURCE_BRANCH="${2:-HEAD}"
+
+git checkout -b "${BRANCH_NAME}" "${SOURCE_BRANCH}"
+git push -u origin "${BRANCH_NAME}"
 
 
