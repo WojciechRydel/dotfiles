@@ -212,9 +212,18 @@ input * {
 # monitors
 output DP-2 pos 0 0 mode 2560x1440@144Hz
 output DP-2 transform 270
-
 output DP-1 pos 1440 560 mode 3440x1440@120Hz
-
 output DP-3 pos 4880 0 mode 2560x1440@144Hz
 output DP-3 transform 90
 
+
+for_window [class="zoom"] floating enable
+for_window [class="zoom" title="Zoom - Licensed Account"] floating disable
+# zoom participants
+for_window [class="zoom" title="Zoom Meeting"] floating disable, move to workspace 5
+# zoom screen share
+for_window [class="zoom" title="Zoom"] floating disable, move to workspace 5
+# zoom screen share info window
+for_window [class="zoom" title="zoom"] floating enable
+
+for_window [class="firefox" title="Google Meet — Mozilla Firefox"] move to workspace 5
