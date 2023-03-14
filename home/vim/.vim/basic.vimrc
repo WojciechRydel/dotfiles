@@ -24,7 +24,7 @@ set smartindent
 set tabstop=2
 set shiftwidth=2
 
-set clipboard=unnamed
+set clipboard=unnamedplus
 set backspace=indent,eol,start
 set foldmethod=syntax
 set foldlevelstart=99
