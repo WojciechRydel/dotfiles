@@ -25,6 +25,7 @@ set tabstop=2
 set shiftwidth=2
 
 set clipboard=unnamedplus
+set paste
 set backspace=indent,eol,start
 set foldmethod=syntax
 set foldlevelstart=99
@@ -37,12 +38,6 @@ set undodir=$XDG_CACHE_HOME/vim/undo
 au BufWritePre /tmp/* setlocal noundofile " do not trach file history for /tmp/
 " -------------------------
 autocmd BufWritePre * %s/\s\+$//e
-" MARKDOWN
-au! BufRead,BufNewFile *.markdown set filetype=markdown
-au! BufRead,BufNewFile *.md       set filetype=markdown
-" Makefile
-autocmd FileType make set noexpandtab
-" JSON specyfic au! BufRead,BufNewFile *.json set textwidth=0
 
 set autoread
 
