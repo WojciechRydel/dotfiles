@@ -25,7 +25,7 @@ set tabstop=2
 set shiftwidth=2
 
 set clipboard=unnamedplus
-set paste
+set nopaste
 set backspace=indent,eol,start
 set foldmethod=syntax
 set foldlevelstart=99
