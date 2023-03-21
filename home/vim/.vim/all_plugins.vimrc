@@ -53,6 +53,8 @@ Plugin 'davidhalter/jedi'
 
 Plugin 'aklt/plantuml-syntax'
 
+Plugin 'hashivim/vim-terraform'
+
 call vundle#end()
 
 filetype plugin on
