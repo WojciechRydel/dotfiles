@@ -9,7 +9,7 @@ let g:ale_linters = {
   \'typescript': ['eslint', 'prettier', 'tslint'],
   \'typescriptreact': ['eslint', 'prettier', 'tslint'],
   \'javascript': ['eslint', 'prettier'],
-  \'python': ['ruff'],
+  \'python': ['ruff', 'flake8', 'mypy'],
 \}
 
 let g:ale_fix_on_save = 1
