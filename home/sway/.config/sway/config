@@ -192,7 +192,8 @@ bindsym $mod+Shift+x exec $HOME/.local/bin/screenlock
 bindsym $mod+Shift+s exec systemctl suspend
 
 # screenshots
-bindsym $mod+Shift+Print exec grim -g "$(slurp)" - | wl-copy
+bindsym $mod+Ctrl+Shift+Print exec $HOME/.local/bin/screenshot clipboard
+bindsym $mod+Ctrl+Print exec $HOME/.local/bin/screenshot
 
 default_border pixel 3
 

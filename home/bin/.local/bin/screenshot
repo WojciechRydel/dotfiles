@@ -1,0 +1,31 @@
+#!/bin/bash
+DESTINATION="${1:-"dir"}"
+TMP_FILE=/tmp/screenshot
+FILE_FORMAT=png
+
+getScreenshotFilePath() {
+  FILE_NAME=$(date "+%Y-%m-%dT%H:%M:%S.%N")
+  DIR="${HOME}/screenshots"
+
+  mkdir -p $DIR
+
+  FILE_PATH="${DIR}/${FILE_NAME}.${FILE_FORMAT}"
+
+  echo $FILE_PATH
+}
+
+case "${DESTINATION}" in
+  dir)
+    DIR="${HOME}/screenshots"
+    FILE_PATH=$(getScreenshotFilePath)
+
+    grim -g "$(slurp)" "${FILE_PATH}"
+
+    notify-send "Screenshot saved" "${FILE_PATH}"
+    ;;
+  clipboard)
+    grim -g "$(slurp)" - | wl-copy
+
+    notify-send "Screenshot saved" "Clipboard"
+    ;;
+esac
