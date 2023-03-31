@@ -19,12 +19,26 @@ case "${DESTINATION}" in
     DIR="${HOME}/screenshots"
     FILE_PATH=$(getScreenshotFilePath)
 
-    grim -g "$(slurp)" "${FILE_PATH}"
+    area="$(slurp)"
+
+    if [ -z "${area}" ]; then
+      notify-send -t 300 "Screenshot aborted"
+      exit
+    fi
+
+    grim -g "${area}" "${FILE_PATH}"
 
     notify-send "Screenshot saved" "${FILE_PATH}"
     ;;
   clipboard)
-    grim -g "$(slurp)" - | wl-copy
+    area="$(slurp)"
+
+    if [ -z "${area}" ]; then
+      notify-send -t 300 "Screenshot aborted"
+      exit
+    fi
+
+    grim -g "${area}" - | wl-copy
 
     notify-send "Screenshot saved" "Clipboard"
     ;;
