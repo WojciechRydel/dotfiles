@@ -1,0 +1,13 @@
+[Default Applications]
+image/jpg=sxiv.desktop
+image/jpeg=sxiv.desktop
+image/png=sxiv.desktop
+application/pdf=zathura.desktop
+x-scheme-handler/mailto=userapp-Thunderbird-F8GA01.desktop
+message/rfc822=userapp-Thunderbird-F8GA01.desktop
+x-scheme-handler/mid=userapp-Thunderbird-F8GA01.desktop
+
+[Added Associations]
+x-scheme-handler/mailto=userapp-Thunderbird-F8GA01.desktop;
+x-scheme-handler/mid=userapp-Thunderbird-F8GA01.desktop;
+
