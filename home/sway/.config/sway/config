@@ -31,6 +31,7 @@ bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec bemenu-run --fn "Ubuntu Mono 14" --scrollbar always --line-height 10| xargs swaymsg exec
+bindsym $mod+Ctrl+d exec bemoji -t
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
