@@ -1,9 +1,9 @@
 * {
     border: none;
-    border-radius: 0;
+    border-radius: 3;
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: Roboto, Helvetica, Arial, sans-serif;
-    font-size: 13px;
+    font-family: Ubuntu Mono, Roboto, Helvetica, Arial, sans-serif;
+    font-size: 16px;
     min-height: 0;
 }
 
@@ -157,6 +157,9 @@ label:focus {
 
 #custom-media.custom-spotify {
     background-color: #66cc99;
+}
+#custom-paru {
+  background-color: blue;
 }
 
 #custom-media.custom-vlc {
