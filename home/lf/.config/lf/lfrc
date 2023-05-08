@@ -8,4 +8,5 @@ set info size:time
 map gr cd /
 map gd cd ~/docs
 map gp cd ~/projects
+map gj cd ~/docs/jdg
 map D delete
