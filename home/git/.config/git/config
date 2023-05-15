@@ -2,8 +2,9 @@
     templateDir = ~/.config/git/templatedir
 
 [user]
-    name = Wojciech Rydel
-    email = wojciech@rydel.xyz
+  name = Wojciech Rydel
+  signingKey = 45D9F6F98EC117B7FA01D3BD9B8BEF4DE4421E47
+  email = wojciech@rydel.xyz
 
 [core]
     pager = delta
