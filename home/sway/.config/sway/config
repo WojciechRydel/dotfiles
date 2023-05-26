@@ -187,7 +187,7 @@ bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 bindsym $mod+Shift+minus move scratchpad
-bindsym $mod+minus scratchpad show, focus scratchpad, resize set height 80%, resize set width 80ppt
+bindsym $mod+minus scratchpad show, resize set 1000 1000 px
 
 bindsym $mod+Shift+x exec $HOME/.local/bin/screenlock
 bindsym $mod+Shift+s exec systemctl suspend
