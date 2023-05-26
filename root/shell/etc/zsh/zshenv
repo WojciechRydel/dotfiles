@@ -17,12 +17,6 @@ then
 	export PATH="/usr/local/bin:/usr/bin:/bin:/usr/games"
 fi
 
-export XDG_CONFIG_HOME="${HOME}/.config"
-export XDG_CACHE_HOME="${HOME}/.cache"
-export XDG_DATA_HOME="${HOME}/.local/share"
-export XDG_STATE_HOME="${HOME}/.local/state"
-export XDG_RUNTIME_DIR="/run/user/${UID}"
 export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
 # oh-my-zsh
 export ZSH=/usr/share/oh-my-zsh
-export EDITOR=/usr/bin/vim
