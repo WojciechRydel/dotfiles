@@ -4,7 +4,7 @@ Documentation=man:Udiskie(1)
 
 [Service]
 ExecStart=/usr/sbin/udiskie
-Restart=on-failure
+Restart=always
 RestartSec=60
 
 [Install]

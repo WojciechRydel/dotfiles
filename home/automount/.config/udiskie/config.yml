@@ -49,6 +49,8 @@ device_config:
   # so that it is possible to completely overwrite the defaults by specifying
   # a catch-all rule (i.e. a rule without device attributes).
 
+- device_file: /dev/nvme0n1
+  ignore: true
 - device_file: /dev/dm-5    # [filter]
   ignore:      false        # [action] never ignore this device
 - id_uuid: 9d53-13ba        # [filter] match by device UUID
