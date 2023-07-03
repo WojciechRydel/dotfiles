@@ -7,7 +7,7 @@ download-filename-format "%t.%e"
 max-downloads 5
 player mpv
 
-
+macro y set browser "mpv %u"; open-in-browser ; set browser "$BROWSER -new-tab %u"
 
 macro E set browser "echo %u >> ~/.newsboat/queue"
 

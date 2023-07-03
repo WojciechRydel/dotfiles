@@ -1,10 +1,15 @@
+---Software---
 http://blog.cleancoder.com/atom.xml
-https://www.python.org/dev/peps/peps.rss "tech" "python"
+https://feed.infoq.com/news/
 https://martinfowler.com/feed.atom
+https://www.python.org/dev/peps/peps.rss "tech" "python"
+---Tools---
 https://gitlab.com/muttmua/mutt/commits/master\?format\=atom "~Mutt"
+---News---
+https://news.ycombinator.com/rss
+https://archlinux.org/feeds/news/
 https://feeds.feedburner.com/sekurak
 https://feeds.simplecast.com/XA_851k3
-https://news.ycombinator.com/rss
 https://feeds.feedburner.com/mrmoneymustache
+---YouTube---
 https://www.youtube.com/feeds/videos.xml?channel_id=UC2D2CMWXMOVWx7giW1n3LIg
-https://archlinux.org/feeds/news/
