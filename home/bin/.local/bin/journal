@@ -1,0 +1,5 @@
+#!/bin/bash
+YEARLY_DIR="~/docs/jouranl/$(date +%Y)"
+mkdir -p "${YEARLY_DIR}"
+
+vim "${YEARLY_DIR}/$(date +%m).txt"
