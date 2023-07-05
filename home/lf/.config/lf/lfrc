@@ -1,7 +1,7 @@
 set ratios 1:2:3
 set cleaner ~/.config/lf/kitty_clean
 set previewer ~/.config/lf/kitty_preview
-set hidden on
+set hidden!
 set drawbox
 set info size:time
 
