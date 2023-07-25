@@ -2,4 +2,4 @@
 YEARLY_DIR="${HOME}/docs/journal/$(date +%Y)"
 mkdir -p "${YEARLY_DIR}"
 
-vim "${YEARLY_DIR}/$(date +%m).txt"
+vim "${YEARLY_DIR}/$(date +%m).txt" +$
