@@ -1,1 +1,1 @@
-vim -c ":Goyo 140x" -c :$  ~/docs/inbox/scratch.txt
+vim -c :Goyo ~/docs/inbox/scratch.txt
