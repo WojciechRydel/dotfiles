@@ -230,3 +230,6 @@ for_window [class="zoom" title="Zoom"] floating disable, move to workspace 5
 for_window [class="zoom" title="zoom"] floating enable
 
 for_window [class="firefox" title="Google Meet — Mozilla Firefox"] move to workspace 5
+
+# enable sway-session.target
+exec "systemctl --user import-environment {,WAYLAND_}DISPLAY SWAYSOCK; systemctl --user start sway-session.target"
