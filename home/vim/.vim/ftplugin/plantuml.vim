@@ -1,1 +1,1 @@
-autocmd! BufWritePost <buffer> silent !plantuml %
+autocmd! BufWritePost <buffer> silent! !plantuml %
