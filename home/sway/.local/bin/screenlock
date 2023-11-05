@@ -7,8 +7,11 @@ fi
 
 OUTPUTS=$(swaymsg -t get_outputs -p | awk '/Output/ { print $2 }')
 
-xargs --max-proc=0 -I{} grim -o {} "${DIR}/{}.jpg" -t jpg <<< "${OUTPUTS[@]}"
-xargs --max-proc=0 -I{} convert "${DIR}/{}.jpg" -blur 0x5 "${DIR}/{}.jpg" <<< "${OUTPUTS[@]}"
+for output in "${OUTPUTS[@]}"
+do
+  grim -o "${output}" "${DIR}/${output}.jpg"
+  convert "${DIR}/${output}.jpg" -blur 0x5 "${DIR}/${output}.jpg"
+done
 
 LOCKS=$(awk -v DIR=${DIR} '{ print "-i "$0 ":" DIR "/" $0 ".jpg " }' <<< "${OUTPUTS[@]}")
 
