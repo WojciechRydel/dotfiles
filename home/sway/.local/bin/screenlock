@@ -1,5 +1,8 @@
 #!/usr/bin/bash
-DIR=/tmp/screenlock
+DIR="${XDG_CACHE_HOME}/screenlock"
+GRIM=/usr/sbin/grim
+CONVERT=/usr/sbin/convert
+SWAYLOCK=/usr/sbin/swaylock
 
 if [ ! -d "${DIR}"  ]; then
   mkdir -p "${DIR}"
@@ -9,10 +12,14 @@ OUTPUTS=$(swaymsg -t get_outputs -p | awk '/Output/ { print $2 }')
 
 for output in "${OUTPUTS[@]}"
 do
-  grim -o "${output}" "${DIR}/${output}.jpg"
-  convert "${DIR}/${output}.jpg" -blur 0x5 "${DIR}/${output}.jpg"
+  $GRIM -o "${output}" "${DIR}/${output}.jpg"
+  $CONVERT "${DIR}/${output}.jpg" -blur 0x5 "${DIR}/${output}.jpg"
 done
 
-LOCKS=$(awk -v DIR=${DIR} '{ print "-i "$0 ":" DIR "/" $0 ".jpg " }' <<< "${OUTPUTS[@]}")
+LOCKS=$(
+  awk -v DIR=${DIR} \
+      '{ print "-i "$0 ":" DIR "/" $0 ".jpg " }' \
+      <<< "${OUTPUTS[@]}"
+)
 
-swaylock $( IFS=$'\n'; echo "${LOCKS[*]}")
+$SWAYLOCK $( IFS=$'\n'; echo "${LOCKS[*]}")
