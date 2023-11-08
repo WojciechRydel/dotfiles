@@ -4,8 +4,10 @@ Documentation=http://jonls.dk/redshift/
 After=display-manager.service
 
 [Service]
+TimeoutStartSec=2
+RestartSec=2
 ExecStart=/usr/bin/redshift-gtk
-Restart=always
+Restart=on-failure
 
 [Install]
 WantedBy=graphical-session.target

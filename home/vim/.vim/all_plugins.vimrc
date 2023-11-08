@@ -10,7 +10,6 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'Raimondi/delimitMate'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'w0rp/ale'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'tpope/vim-surround'
@@ -33,8 +32,6 @@ Plugin 'crusoexia/vim-monokai'
 Plugin 'scrooloose/nerdtree'
 
 Plugin 'scrooloose/nerdcommenter'
-
-Plugin 'styled-components/vim-styled-components'
 
 Plugin 'ledger/vim-ledger'
 
