@@ -10,16 +10,22 @@ fi
 
 OUTPUTS=$(swaymsg -t get_outputs -p | awk '/Output/ { print $2 }')
 
-for output in "${OUTPUTS[@]}"
-do
+PREV_IFS=$IFS
+IFS=$'\n'
+OUTPUTS=($OUTPUTS)
+IFS=$PREV_IFS
+
+for output in "${OUTPUTS[@]}"; do
   $GRIM -o "${output}" "${DIR}/${output}.jpg"
   $CONVERT "${DIR}/${output}.jpg" -blur 0x5 "${DIR}/${output}.jpg"
 done
 
+echo $(wc -l <<< "${OUTPUTS[@]}")
+
 LOCKS=$(
   awk -v DIR=${DIR} \
       '{ print "-i "$0 ":" DIR "/" $0 ".jpg " }' \
-      <<< "${OUTPUTS[@]}"
+      <<< $(printf "%s\n" "${OUTPUTS[@]}")
 )
 
 $SWAYLOCK $( IFS=$'\n'; echo "${LOCKS[*]}")
