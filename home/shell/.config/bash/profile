@@ -1,0 +1,15 @@
+# vim:filetype=bash
+
+export PATH=/home/voytech/.pyenv/plugins/pyenv-virtualenv/shims:/home/voytech/.pyenv/shims:/home/voytech/.pyenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/voytech/.local/bin
+
+source "${XDG_CONFIG_HOME}/bash/aliases"
+
+if [[ -d "${XDG_CONFIG_HOME}/bash/bash.d" ]]; then
+  for dropin_conf in "${XDG_CONFIG_HOME}/bash/bash.d/*.bash";do
+    source $dropin_conf;
+  done
+fi
+
+set -o vi
+
+[ -e /usr/sbin/liquidprompt ] && source /usr/sbin/liquidprompt
