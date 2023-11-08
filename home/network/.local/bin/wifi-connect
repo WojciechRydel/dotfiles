@@ -1,0 +1,35 @@
+#!/usr/bin/bash
+notification_id=$(
+  notify-send "Looking for WIFI networks" \
+            --print-id \
+            --expire-time 3000
+)
+
+wifi_list=$(nmcli device wifi list | awk 'NR>1')
+
+notify-send "Found $(wc -l <<< $wifi_list) network(s)" \
+            --expire-time 1500 \
+            --replace-id "${notification_id}"
+
+selected=$(
+    bemenu --prompt 'Connect to WIFI' \
+           --fn 'Ubuntu Mono 14' \
+           --list 10 \
+           --ignorecase \
+           <<< "${wifi_list}"
+)
+
+if [[ -z "${selected}" ]]; then
+  echo "not selected"
+  exit 0
+fi
+
+network_uuid=$(awk '{ print $1 }' <<< "${selected}")
+network_name=$(awk '{ print $2 }' <<< "${selected}")
+
+notify-send "Connecting to < ${network_name}" \
+            --expire-time 2000
+
+nmcli device wifi connect "${network_uuid}"
+
+

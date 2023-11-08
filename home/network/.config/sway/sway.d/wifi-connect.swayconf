@@ -1,0 +1,2 @@
+bindsym $mod+Ctrl+w exec wifi-connect
+bindsym $mod+Ctrl+v exec vpn-connect

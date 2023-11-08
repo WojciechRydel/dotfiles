@@ -1,0 +1,35 @@
+#!/usr/bin/bash
+vpn_list=$(nmcli connection show | awk '/vpn/')
+
+selected=$(
+    bemenu --prompt 'Connect to VPN' \
+           --fn 'Ubuntu Mono 14' \
+           --list 10 \
+           --ignorecase \
+           <<< "${vpn_list}"
+)
+
+if [[ -z "${selected}" ]]; then
+  echo "not selected"
+  exit 0
+fi
+
+network_uuid=$(awk '{ print $2 }' <<< "${selected}")
+network_name=$(awk '{ print $1 }' <<< "${selected}")
+
+is_activated=$(nmcli connection show "${network_uuid}" | awk '/activated/')
+
+if [[ -n "${is_activated}" ]]; then
+
+  notify-send "Disconnecting from ${network_name}" \
+              --expire-time 2000
+
+  nmcli connection down "${network_uuid}"
+  exit 0
+fi
+
+notify-send "Connecting to < ${network_name}" \
+            --expire-time 2000
+
+nmcli connection up "${network_uuid}"
+
