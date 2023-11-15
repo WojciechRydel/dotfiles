@@ -3,7 +3,8 @@ syntax enable
 set path+=**
 set wildmenu
 set number
-set cursorline
+set nocursorline
+set relativenumber
 set splitright
 set splitbelow
 let mapleader=','
