@@ -12,7 +12,6 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'Raimondi/delimitMate'
 Plugin 'w0rp/ale'
 Plugin 'editorconfig/editorconfig-vim'
-Plugin 'tpope/vim-surround'
 
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
@@ -51,6 +50,9 @@ Plugin 'davidhalter/jedi'
 Plugin 'aklt/plantuml-syntax'
 
 Plugin 'hashivim/vim-terraform'
+
+Plugin 'prabirshrestha/vim-lsp'
+Plugin 'mattn/vim-lsp-settings'
 
 call vundle#end()
 

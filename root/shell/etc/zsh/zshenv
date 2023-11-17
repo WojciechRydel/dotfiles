@@ -17,6 +17,5 @@ then
 	export PATH="/usr/local/bin:/usr/bin:/bin:/usr/games"
 fi
 
-export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
 # oh-my-zsh
 export ZSH=/usr/share/oh-my-zsh

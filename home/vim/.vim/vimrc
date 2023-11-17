@@ -3,6 +3,7 @@ source ~/.vim/all_plugins.vimrc
 
 colorscheme monokai
 
+source ~/.vim/ls-settings.vimrc
 source ~/.vim/shortcuts.vimrc
 
 
