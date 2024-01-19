@@ -1,0 +1,20 @@
+#!/usr/bin/bash
+ssh_hosts_list=$(cat "${HOME}/.ssh/config" | awk '/Host\s/ {print $2}')
+selected_host=$(
+  bemenu --prompt 'Connect to SSH' \
+    --fn 'Ubuntu Mono 14' \
+    --list 10 \
+    --ignorecase \
+    <<< "${ssh_hosts_list}"
+)
+
+if [[ -z "${selected_host}" ]]; then
+  echo "not selected"
+  exit 0
+fi
+
+notify-send "Connecting to ${selected_host} via SSH" \
+  --expire-time 2000
+
+kitty ssh "${selected_host}"
+
