@@ -49,7 +49,6 @@ set updatetime=250
 " spell checking and grammar
 "
 set thesaurus+=$HOME/.vim/thesaurus
-autocmd FileType markdown asciidoc setlocal spell
 
 set tags=./.tags,./tags,.tags,tags
 
