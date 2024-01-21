@@ -1,3 +1,4 @@
 *.kml
 home/gnupg/.gnupg
 home/default-apps/
+home/gnupg/.gnupg/sshcontrol
