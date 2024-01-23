@@ -1,5 +1,9 @@
 #!/usr/bin/bash
-ssh_hosts_list=$(cat "${HOME}/.ssh/config" | awk '/Host\s/ {print $2}')
+ssh_hosts_list=$(
+  cat "${HOME}/.ssh/config" \
+    "${HOME}"/.config/ssh/ssh.d/**/*.conf \
+  | awk '/Host\s/ {print $2}'
+)
 selected_host=$(
   bemenu --prompt 'Connect to SSH' \
     --fn 'Ubuntu Mono 14' \
