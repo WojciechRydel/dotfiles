@@ -217,10 +217,12 @@ input * {
 output DP-2 pos 0 0 mode 2560x1440@144Hz
 output DP-2 transform 270
 output DP-1 pos 1440 560 mode 3440x1440@120Hz
-output DP-3 pos 4880 0 mode 2560x1440@144Hz
-output DP-3 transform 90
+output DP-3 pos 4880 560 mode 2560x1440@144Hz
+#output DP-3 pos 4880 0 mode 2560x1440@144Hz
+#output DP-3 transform 90
 
 include $XDG_CONFIG_HOME/sway/sway.d/*.swayconf
 
+bindsym $mod+Shift+g exec wtype $(secret-tool lookup Title gts-waw-vpn)
 # enable sway-session.target
 exec "systemctl --user import-environment {,WAYLAND_}DISPLAY SWAYSOCK; systemctl --user start sway-session.target"
