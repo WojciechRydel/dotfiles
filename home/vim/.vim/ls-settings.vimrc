@@ -1,8 +1,19 @@
+let g:lsp_settings = {
+\  'pylsp-all': {
+\    'workspace_config': {
+\      'pylsp-all': {
+\        'configurationSources': ['flake8'],
+\        'plugins': {'pyflakes': {'enabled': 0}}
+\      }
+\    }
+\  }
+\}
+
 if executable('pylsp')
     " pip install python-lsp-server
     au User lsp_setup call lsp#register_server({
-        \ 'name': 'pylsp',
-        \ 'cmd': {server_info->['pylsp']},
+        \ 'name': 'pylsp-all',
+        \ 'cmd': {server_info->['pylsp-all']},
         \ 'allowlist': ['python'],
         \ })
 endif
@@ -22,7 +33,6 @@ function! s:on_lsp_buffer_enabled() abort
     nmap <buffer> ]g <plug>(lsp-next-diagnostic)
     nmap <buffer> K <plug>(lsp-hover)
     nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
-    nnoremap <buffer> <expr><c-d> lsp#scroll(-4)
 
     let g:lsp_format_sync_timeout = 1000
     autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
@@ -36,9 +46,9 @@ augroup lsp_install
     autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 augroup END
 
-set foldmethod=expr
-  \ foldexpr=lsp#ui#vim#folding#foldexpr()
-  \ foldtext=lsp#ui#vim#folding#foldtext()
+"set foldmethod=expr
+  "\ foldexpr=lsp#ui#vim#folding#foldexpr()
+  "\ foldtext=lsp#ui#vim#folding#foldtext()
 
 " If you would like to disable folding globally, you can add this to your configuration:
 "

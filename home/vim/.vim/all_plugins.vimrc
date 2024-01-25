@@ -53,6 +53,8 @@ Plugin 'hashivim/vim-terraform'
 
 Plugin 'prabirshrestha/vim-lsp'
 Plugin 'mattn/vim-lsp-settings'
+Plugin 'prabirshrestha/asyncomplete.vim'
+Plugin 'prabirshrestha/asyncomplete-lsp.vim'
 
 call vundle#end()
 
