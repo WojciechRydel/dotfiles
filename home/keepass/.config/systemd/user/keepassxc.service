@@ -1,0 +1,11 @@
+[Unit]
+Description=KeepassXC
+Documentation=man:keepassxc(1)
+
+[Service]
+ExecStart=/usr/sbin/keepassxc
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=graphical-session.target
