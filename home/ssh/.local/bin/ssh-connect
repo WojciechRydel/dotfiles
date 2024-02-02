@@ -1,8 +1,7 @@
-#!/usr/bin/bash
+#!/usr/bin/zsh
+drop_in_configs=$(ls $XDG_CONFIG_HOME/ssh/ssh.d/**/*.sshconfig)
 ssh_hosts_list=$(
-  cat "${HOME}/.ssh/config" \
-    "${HOME}"/.config/ssh/ssh.d/**/*.conf \
-  | awk '/Host\s/ {print $2}'
+  awk '/Host\s/ {print $2}' <(cat ${HOME}/.ssh/config "${drop_in_configs}")
 )
 selected_host=$(
   bemenu --prompt 'Connect to SSH' \
