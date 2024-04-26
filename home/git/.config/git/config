@@ -10,6 +10,11 @@
     pager = delta
     editor = vim
 
+[delta]
+  navigate = true
+  side-by-side = true
+  line-numbers = true
+
 [alias]
     st = status
     ci = commit -S
