@@ -1,6 +1,0 @@
-[Unit]
-Description=Prune mako notification history past its TTL
-
-[Service]
-Type=oneshot
-ExecStart=%h/.local/bin/notif-history --prune

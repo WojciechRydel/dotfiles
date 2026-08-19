@@ -4,7 +4,9 @@
     border: none;
     border-radius: 3;
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: 'Comic Mono';
+    /* Comic Mono has no private-use glyphs; name the icon fonts explicitly
+       so the swaync bell never falls back to an empty box. */
+    font-family: 'Comic Mono', "Symbols Nerd Font Mono", "Font Awesome 7 Free", monospace;
     font-size: 14px;
     min-height: 0;
 }
@@ -76,7 +78,7 @@ window#waybar.chromium {
 #network,
 #pulseaudio,
 #custom-media,
-#custom-notifications,
+#custom-swaync,
 #tray,
 #mode,
 #idle_inhibitor,
@@ -165,17 +167,19 @@ label:focus {
   background-color: blue;
 }
 
-#custom-notifications {
-    background-color: #34495e;
+#custom-swaync {
+    background-color: #2d3436;
+    color: #9CE3EC;
 }
 
-#custom-notifications.unread {
-    background-color: #d35400;
+#custom-swaync.notification,
+#custom-swaync.dnd-notification {
+    color: #ff5c5c;
 }
 
-#custom-notifications.dnd {
-    background-color: #90b1b1;
-    color: #2d3436;
+#custom-swaync.dnd-none,
+#custom-swaync.dnd-notification {
+    background-color: #3a2d33;
 }
 
 #custom-media.custom-vlc {

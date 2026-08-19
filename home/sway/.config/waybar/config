@@ -23,7 +23,7 @@
             "clock#ny",
             "clock#la",
             "clock",
-            "custom/notifications",
+            "custom/swaync",
             "tray"
         ],
         "custom/work-context": {
@@ -176,16 +176,25 @@
             "return-type": "json",
             "format": "{}"
         },
-        "custom/notifications": {
-            "exec": "notif-history --waybar",
-            "return-type": "json",
-            "interval": 60,
-            "signal": 8,
-            "format": "{}",
+        "custom/swaync": {
             "tooltip": true,
-            "on-click": "notif-panel",
-            "on-click-middle": "makoctl dismiss --all && notif-history --mark-seen",
-            "on-click-right": "notif-history --dnd-toggle"
+            "format": "{icon}",
+            "format-icons": {
+                "notification": "\uf0f3<span foreground='#ff5c5c'><sup>\uf111</sup></span>",
+                "none": "\uf0f3",
+                "dnd-notification": "\uf1f6<span foreground='#ff5c5c'><sup>\uf111</sup></span>",
+                "dnd-none": "\uf1f6",
+                "inhibited-notification": "\uf0f3<span foreground='#ff5c5c'><sup>\uf111</sup></span>",
+                "inhibited-none": "\uf0f3",
+                "dnd-inhibited-notification": "\uf1f6<span foreground='#ff5c5c'><sup>\uf111</sup></span>",
+                "dnd-inhibited-none": "\uf1f6"
+            },
+            "return-type": "json",
+            "exec-if": "which swaync-client",
+            "exec": "swaync-client -swb",
+            "on-click": "swaync-client -t -sw",
+            "on-click-right": "swaync-client -d -sw",
+            "escape": true
         }
     },
     {
@@ -215,19 +224,28 @@
             "battery",
             "battery#bat2",
             "clock",
-            "custom/notifications",
+            "custom/swaync",
             "tray"
         ],
-        "custom/notifications": {
-            "exec": "notif-history --waybar",
-            "return-type": "json",
-            "interval": 60,
-            "signal": 8,
-            "format": "{}",
+        "custom/swaync": {
             "tooltip": true,
-            "on-click": "notif-panel",
-            "on-click-middle": "makoctl dismiss --all && notif-history --mark-seen",
-            "on-click-right": "notif-history --dnd-toggle"
+            "format": "{icon}",
+            "format-icons": {
+                "notification": "\uf0f3<span foreground='#ff5c5c'><sup>\uf111</sup></span>",
+                "none": "\uf0f3",
+                "dnd-notification": "\uf1f6<span foreground='#ff5c5c'><sup>\uf111</sup></span>",
+                "dnd-none": "\uf1f6",
+                "inhibited-notification": "\uf0f3<span foreground='#ff5c5c'><sup>\uf111</sup></span>",
+                "inhibited-none": "\uf0f3",
+                "dnd-inhibited-notification": "\uf1f6<span foreground='#ff5c5c'><sup>\uf111</sup></span>",
+                "dnd-inhibited-none": "\uf1f6"
+            },
+            "return-type": "json",
+            "exec-if": "which swaync-client",
+            "exec": "swaync-client -swb",
+            "on-click": "swaync-client -t -sw",
+            "on-click-right": "swaync-client -d -sw",
+            "escape": true
         }
     },
     {
@@ -257,19 +275,28 @@
             "battery",
             "battery#bat2",
             "clock",
-            "custom/notifications",
+            "custom/swaync",
             "tray"
         ],
-        "custom/notifications": {
-            "exec": "notif-history --waybar",
-            "return-type": "json",
-            "interval": 60,
-            "signal": 8,
-            "format": "{}",
+        "custom/swaync": {
             "tooltip": true,
-            "on-click": "notif-panel",
-            "on-click-middle": "makoctl dismiss --all && notif-history --mark-seen",
-            "on-click-right": "notif-history --dnd-toggle"
+            "format": "{icon}",
+            "format-icons": {
+                "notification": "\uf0f3<span foreground='#ff5c5c'><sup>\uf111</sup></span>",
+                "none": "\uf0f3",
+                "dnd-notification": "\uf1f6<span foreground='#ff5c5c'><sup>\uf111</sup></span>",
+                "dnd-none": "\uf1f6",
+                "inhibited-notification": "\uf0f3<span foreground='#ff5c5c'><sup>\uf111</sup></span>",
+                "inhibited-none": "\uf0f3",
+                "dnd-inhibited-notification": "\uf1f6<span foreground='#ff5c5c'><sup>\uf111</sup></span>",
+                "dnd-inhibited-none": "\uf1f6"
+            },
+            "return-type": "json",
+            "exec-if": "which swaync-client",
+            "exec": "swaync-client -swb",
+            "on-click": "swaync-client -t -sw",
+            "on-click-right": "swaync-client -d -sw",
+            "escape": true
         }
     }
 ]

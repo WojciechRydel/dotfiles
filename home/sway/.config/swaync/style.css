@@ -1,0 +1,145 @@
+/* SwayNotificationCenter theme — dark + cyan accent (#9CE3EC), matches dunst/waybar */
+
+:root {
+  --bg:        #1e2228;
+  --bg-alt:    #262b33;
+  --fg:        #e6e6e6;
+  --fg-dim:    #9aa5b1;
+  --accent:    #9CE3EC;
+  --critical:  #ff5c5c;
+  --radius:    10px;
+
+  /* per-urgency card tints (subtle — keep text readable on dark) */
+  --bg-low:      #1b2530;  /* faint cool blue  */
+  --bg-critical: #2b1d20;  /* faint warm red   */
+}
+
+* {
+  font-family: "Ubuntu Mono", "Symbols Nerd Font Mono", "Font Awesome 7 Free", monospace;
+  font-size: 14px;
+}
+
+/* ---------- individual notification popups ---------- */
+.notification {
+  border-radius: var(--radius);
+  margin: 6px 8px;
+  padding: 0;
+  background: transparent;
+}
+
+.notification-row {
+  outline: none;
+}
+
+.notification-content {
+  background: var(--bg);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 10px;
+  color: var(--fg);
+}
+
+/* ---------- per-urgency background tints (worked example) ----------
+   swaync tags each .notification with an urgency class: .low, .critical,
+   or nothing for normal. We match `.notification.<urgency>` (compound —
+   no space) then its child `.notification-content` (descendant — space).
+   Normal notifications match neither and keep the plain --bg from above. */
+.notification.low .notification-content {
+  background: var(--bg-low);
+}
+
+.notification.critical .notification-content {
+  background: var(--bg-critical);
+  border-color: var(--critical);
+}
+
+.summary {
+  font-weight: bold;
+  color: var(--fg);
+}
+
+.time {
+  color: var(--fg-dim);
+  font-size: 12px;
+}
+
+.body {
+  color: var(--fg-dim);
+}
+
+.close-button {
+  background: transparent;
+  color: var(--fg-dim);
+  border-radius: 100%;
+  margin: 4px;
+  padding: 2px;
+}
+.close-button:hover {
+  background: var(--critical);
+  color: #ffffff;
+}
+
+/* action buttons on a notification */
+.notification-action {
+  background: var(--bg-alt);
+  color: var(--fg);
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  margin: 4px;
+}
+.notification-action:hover {
+  background: var(--accent);
+  color: #10151a;
+}
+
+/* ---------- the control center / history panel ---------- */
+.control-center {
+  background: var(--bg);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 10px;
+}
+
+.control-center .notification-content {
+  background: var(--bg-alt);
+}
+
+.widget-title {
+  color: var(--fg);
+  font-size: 16px;
+  font-weight: bold;
+  margin: 6px 4px 10px 4px;
+}
+.widget-title > button {
+  background: var(--bg-alt);
+  color: var(--fg);
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  padding: 4px 12px;
+}
+.widget-title > button:hover {
+  background: var(--accent);
+  color: #10151a;
+}
+
+/* Do Not Disturb toggle row */
+.widget-dnd {
+  color: var(--fg);
+  margin: 4px;
+  font-size: 14px;
+}
+.widget-dnd > switch {
+  border-radius: 12px;
+  background: var(--bg-alt);
+}
+.widget-dnd > switch:checked {
+  background: var(--accent);
+}
+.widget-dnd > switch slider {
+  background: var(--fg);
+  border-radius: 12px;
+}
+
+.blank-window {
+  background: transparent;
+}
