@@ -1,0 +1,608 @@
+#!/usr/bin/env python3
+"""notif-panel -- a slide-in notification centre for the mako TTL history.
+
+Reads the JSONL history written by notif-log, renders it as a layer-shell
+panel anchored to the right edge of the focused output, and lets you copy,
+delete or clear entries. Running it a second time closes the open panel, so
+it can be bound to a single key.
+
+    notif-panel             toggle the panel
+    notif-panel --open      open it (no-op if already open)
+    notif-panel --close     close a running panel
+
+Retention is owned by notif-history; this is only a viewer plus a deleter.
+"""
+import fcntl
+import json
+import os
+import signal
+import subprocess
+import sys
+import time
+
+import gi
+
+gi.require_version("Gtk", "3.0")
+gi.require_version("Gdk", "3.0")
+gi.require_version("GdkPixbuf", "2.0")
+gi.require_version("GtkLayerShell", "0.1")
+from gi.repository import (  # noqa: E402
+    Gdk,
+    GdkPixbuf,
+    Gio,
+    GLib,
+    Gtk,
+    GtkLayerShell,
+    Pango,
+)
+
+WIDTH = 420
+
+STATE_DIR = os.path.join(
+    os.environ.get("XDG_STATE_HOME", os.path.expanduser("~/.local/state")), "mako"
+)
+LOG = os.path.join(STATE_DIR, "history.jsonl")
+LOCK = os.path.join(STATE_DIR, "history.lock")
+SEEN = os.path.join(STATE_DIR, "history.seen")
+PID = os.path.join(STATE_DIR, "panel.pid")
+
+CONF = os.path.join(
+    os.environ.get("XDG_CONFIG_HOME", os.path.expanduser("~/.config")),
+    "mako",
+    "history.env",
+)
+
+CSS = b"""
+window.notif-panel { background-color: rgba(43, 48, 59, 0.96); }
+
+.panel-header {
+    background-color: #232830;
+    border-bottom: 1px solid #4a5568;
+    padding: 12px 14px;
+}
+.panel-title { font-size: 15px; font-weight: bold; color: #ffffff; }
+.panel-subtitle { font-size: 11px; color: #8b96a5; }
+
+.panel-footer {
+    background-color: #232830;
+    border-top: 1px solid #4a5568;
+    padding: 8px 10px;
+}
+
+.notif-card {
+    background-color: #2f3541;
+    border-radius: 4px;
+    margin: 4px 8px;
+}
+.notif-card:hover { background-color: #3a4150; }
+
+/* Kill GTK's default blue selection; keyboard focus gets a subtle lift. */
+list, list row { background-color: transparent; }
+list row:selected { background-color: transparent; }
+list row:selected .notif-card {
+    background-color: #3f4757;
+    border: 1px solid #90b1b1;
+}
+list row:focus { outline: none; }
+
+/* Left urgency stripe. */
+.stripe { min-width: 3px; border-radius: 2px; }
+.stripe-low      { background-color: #4a5568; }
+.stripe-normal   { background-color: #64727d; }
+.stripe-critical { background-color: #eb4d4b; }
+
+.notif-app     { font-size: 11px; font-weight: bold; color: #90b1b1; }
+.notif-time    { font-size: 11px; color: #8b96a5; }
+.notif-summary { font-size: 13px; font-weight: bold; color: #ffffff; }
+.notif-body    { font-size: 12px; color: #c0c5ce; }
+
+.icon-btn {
+    background: none;
+    border: none;
+    box-shadow: none;
+    color: #8b96a5;
+    padding: 2px 6px;
+    min-height: 0;
+    min-width: 0;
+}
+.icon-btn:hover { color: #ffffff; background-color: #4a5568; border-radius: 3px; }
+
+.flat-btn {
+    background-image: none;
+    background-color: #3a4150;
+    border: 1px solid #4a5568;
+    border-radius: 3px;
+    color: #ffffff;
+    padding: 5px 12px;
+    font-size: 12px;
+}
+.flat-btn:hover { background-color: #4a5568; }
+.flat-btn.on { background-color: #d35400; border-color: #d35400; }
+
+.empty-label { color: #8b96a5; font-size: 13px; }
+"""
+
+
+def wrapped_label(text, css_class, lines=0):
+    """A label that wraps inside the panel instead of widening it.
+
+    WORD_CHAR (not the default WORD) is what stops a long unbroken URL from
+    setting the natural width of the whole window; width_chars=1 keeps the
+    minimum small so the card can still shrink.
+    """
+    lbl = Gtk.Label(label=text, xalign=0)
+    lbl.get_style_context().add_class(css_class)
+    lbl.set_line_wrap(True)
+    lbl.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
+    lbl.set_max_width_chars(38)
+    lbl.set_width_chars(1)
+    lbl.set_justify(Gtk.Justification.LEFT)
+    if lines:
+        lbl.set_lines(lines)
+        lbl.set_ellipsize(Pango.EllipsizeMode.END)
+    return lbl
+
+
+def read_conf():
+    ttl_days, max_entries = 7, 2000
+    try:
+        with open(CONF) as fh:
+            for line in fh:
+                line = line.strip()
+                if line.startswith("TTL_DAYS="):
+                    ttl_days = int(line.split("=", 1)[1])
+                elif line.startswith("MAX_ENTRIES="):
+                    max_entries = int(line.split("=", 1)[1])
+    except (OSError, ValueError):
+        pass
+    return ttl_days, max_entries
+
+
+def load_entries():
+    """Valid entries, newest first. Malformed lines are skipped, as in notif-history."""
+    out = []
+    try:
+        with open(LOG) as fh:
+            for line in fh:
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    obj = json.loads(line)
+                except ValueError:
+                    continue
+                if isinstance(obj, dict):
+                    out.append(obj)
+    except OSError:
+        return []
+    out.reverse()
+    return out
+
+
+def rewrite_log(keep):
+    """Replace the log with `keep` (oldest first), holding the same lock notif-log uses."""
+    os.makedirs(STATE_DIR, exist_ok=True)
+    with open(LOCK, "w") as lk:
+        fcntl.flock(lk, fcntl.LOCK_EX)
+        tmp = LOG + ".tmp"
+        with open(tmp, "w") as fh:
+            for e in keep:
+                fh.write(json.dumps(e, ensure_ascii=False) + "\n")
+        os.replace(tmp, LOG)
+        fcntl.flock(lk, fcntl.LOCK_UN)
+
+
+def entry_key(e):
+    return (e.get("ts"), e.get("id"), e.get("summary"), e.get("body"))
+
+
+def mark_seen():
+    try:
+        os.makedirs(STATE_DIR, exist_ok=True)
+        with open(SEEN, "w") as fh:
+            fh.write(str(int(time.time())))
+    except OSError:
+        pass
+    signal_waybar()
+
+
+def signal_waybar():
+    subprocess.run(
+        ["pkill", "-RTMIN+8", "waybar"],
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        check=False,
+    )
+
+
+def dnd_active():
+    try:
+        out = subprocess.run(
+            ["makoctl", "mode"], capture_output=True, text=True, check=False
+        ).stdout
+    except OSError:
+        return False
+    return "do-not-disturb" in out.split()
+
+
+class Panel(Gtk.Window):
+    def __init__(self):
+        super().__init__(type=Gtk.WindowType.TOPLEVEL)
+        self.get_style_context().add_class("notif-panel")
+        # Pin the width. Without this a single long URL in a body stretches the
+        # whole panel, since GTK grows the window to the widest child.
+        self.set_size_request(WIDTH, -1)
+
+        GtkLayerShell.init_for_window(self)
+        GtkLayerShell.set_layer(self, GtkLayerShell.Layer.OVERLAY)
+        GtkLayerShell.set_namespace(self, "notif-panel")
+        for edge in (
+            GtkLayerShell.Edge.TOP,
+            GtkLayerShell.Edge.RIGHT,
+            GtkLayerShell.Edge.BOTTOM,
+        ):
+            GtkLayerShell.set_anchor(self, edge, True)
+        GtkLayerShell.set_margin(self, GtkLayerShell.Edge.TOP, 8)
+        GtkLayerShell.set_margin(self, GtkLayerShell.Edge.RIGHT, 8)
+        GtkLayerShell.set_margin(self, GtkLayerShell.Edge.BOTTOM, 8)
+        GtkLayerShell.set_keyboard_mode(self, GtkLayerShell.KeyboardMode.EXCLUSIVE)
+
+        self.connect("key-press-event", self.on_key)
+        self.connect("destroy", lambda *_: self.quit())
+
+        root = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        self.add(root)
+
+        # --- header ---
+        header = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
+        header.get_style_context().add_class("panel-header")
+        titles = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        title = Gtk.Label(label="Notifications", xalign=0)
+        title.get_style_context().add_class("panel-title")
+        self.subtitle = Gtk.Label(label="", xalign=0)
+        self.subtitle.get_style_context().add_class("panel-subtitle")
+        titles.pack_start(title, False, False, 0)
+        titles.pack_start(self.subtitle, False, False, 0)
+        header.pack_start(titles, True, True, 0)
+
+        close = Gtk.Button(label="✕")
+        close.get_style_context().add_class("icon-btn")
+        close.set_valign(Gtk.Align.CENTER)
+        close.connect("clicked", lambda *_: self.quit())
+        header.pack_end(close, False, False, 0)
+        root.pack_start(header, False, False, 0)
+
+        # --- list ---
+        self.scroll = Gtk.ScrolledWindow()
+        self.scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        self.listbox = Gtk.ListBox()
+        self.listbox.set_selection_mode(Gtk.SelectionMode.SINGLE)
+        self.listbox.connect("row-activated", self.on_activate)
+        self.scroll.add(self.listbox)
+        root.pack_start(self.scroll, True, True, 0)
+
+        # --- footer ---
+        footer = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
+        footer.get_style_context().add_class("panel-footer")
+        clear = Gtk.Button(label="Clear all")
+        clear.get_style_context().add_class("flat-btn")
+        clear.connect("clicked", self.on_clear_all)
+        footer.pack_start(clear, False, False, 0)
+
+        self.dnd_btn = Gtk.Button(label="Do not disturb")
+        self.dnd_btn.get_style_context().add_class("flat-btn")
+        self.dnd_btn.connect("clicked", self.on_dnd)
+        footer.pack_end(self.dnd_btn, False, False, 0)
+        root.pack_start(footer, False, False, 0)
+
+        self.entries = []
+        self.icon_theme = Gtk.IconTheme.get_default()
+        self.reload()
+
+        # Live-update while the panel is open.
+        self.monitor = Gio.File.new_for_path(LOG).monitor_file(
+            Gio.FileMonitorFlags.NONE, None
+        )
+        self.monitor.connect("changed", self.on_log_changed)
+        self._reload_pending = False
+
+    # ---------------------------------------------------------------- data --
+    def reload(self):
+        self.entries = load_entries()
+        ttl_days, _ = read_conf()
+        self.subtitle.set_text(f"{len(self.entries)} kept · TTL {ttl_days}d")
+        self.dnd_btn.get_style_context().remove_class("on")
+        if dnd_active():
+            self.dnd_btn.get_style_context().add_class("on")
+
+        for child in self.listbox.get_children():
+            self.listbox.remove(child)
+
+        if not self.entries:
+            row = Gtk.ListBoxRow()
+            row.set_selectable(False)
+            lbl = Gtk.Label(label="No notifications")
+            lbl.get_style_context().add_class("empty-label")
+            lbl.set_margin_top(24)
+            lbl.set_margin_bottom(24)
+            row.add(lbl)
+            self.listbox.add(row)
+        else:
+            for e in self.entries:
+                self.listbox.add(self.make_row(e))
+
+        self.listbox.show_all()
+        first = self.listbox.get_row_at_index(0)
+        if first is not None and first.get_selectable():
+            self.listbox.select_row(first)
+
+    def on_log_changed(self, *_):
+        # Coalesce the burst of events a single append produces.
+        if self._reload_pending:
+            return
+        self._reload_pending = True
+
+        def go():
+            self._reload_pending = False
+            self.reload()
+            return False
+
+        GLib.timeout_add(150, go)
+
+    # ----------------------------------------------------------------- ui ---
+    def resolve_icon(self, entry):
+        candidates = []
+        for key in ("icon", "desktop_entry"):
+            val = (entry.get(key) or "").strip()
+            if val:
+                candidates.append(val)
+        app = (entry.get("app") or "").strip()
+        if app:
+            candidates.append(app.lower().replace(" ", "-"))
+        candidates.append("dialog-information")
+
+        for name in candidates:
+            if name.startswith("/") or name.startswith("file://"):
+                path = name[7:] if name.startswith("file://") else name
+                try:
+                    pb = GdkPixbuf.Pixbuf.new_from_file_at_size(path, 24, 24)
+                    return Gtk.Image.new_from_pixbuf(pb)
+                except GLib.Error:
+                    continue
+            try:
+                pb = self.icon_theme.load_icon(
+                    name, 24, Gtk.IconLookupFlags.FORCE_SIZE
+                )
+                return Gtk.Image.new_from_pixbuf(pb)
+            except GLib.Error:
+                continue
+        return Gtk.Image.new_from_icon_name("dialog-information", Gtk.IconSize.DND)
+
+    def make_row(self, entry):
+        row = Gtk.ListBoxRow()
+        row.entry = entry
+
+        card = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
+        card.get_style_context().add_class("notif-card")
+
+        urgency = entry.get("urgency") or "normal"
+        stripe = Gtk.Box()
+        stripe.get_style_context().add_class("stripe")
+        stripe.get_style_context().add_class(
+            f"stripe-{urgency if urgency in ('low', 'normal', 'critical') else 'normal'}"
+        )
+        card.pack_start(stripe, False, False, 0)
+
+        icon = self.resolve_icon(entry)
+        icon.set_valign(Gtk.Align.START)
+        icon.set_margin_top(10)
+        icon.set_margin_start(6)
+        card.pack_start(icon, False, False, 0)
+
+        body_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=2)
+        body_box.set_margin_top(8)
+        body_box.set_margin_bottom(8)
+        body_box.set_margin_end(4)
+
+        meta = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
+        app = Gtk.Label(label=entry.get("app") or "?", xalign=0)
+        app.get_style_context().add_class("notif-app")
+        app.set_ellipsize(Pango.EllipsizeMode.END)
+        meta.pack_start(app, False, False, 0)
+        ts = entry.get("ts") or 0
+        when = Gtk.Label(label=time.strftime("%m-%d %H:%M", time.localtime(ts)), xalign=1)
+        when.get_style_context().add_class("notif-time")
+        meta.pack_end(when, False, False, 0)
+        body_box.pack_start(meta, False, False, 0)
+
+        summary = (entry.get("summary") or "").strip()
+        if summary:
+            body_box.pack_start(
+                wrapped_label(summary, "notif-summary"), False, False, 0
+            )
+
+        text = (entry.get("body") or "").strip()
+        if text:
+            body_box.pack_start(
+                wrapped_label(text, "notif-body", lines=6), False, False, 0
+            )
+
+        card.pack_start(body_box, True, True, 0)
+
+        delete = Gtk.Button(label="✕")
+        delete.get_style_context().add_class("icon-btn")
+        delete.set_valign(Gtk.Align.START)
+        delete.set_margin_top(6)
+        delete.connect("clicked", self.on_delete, entry)
+        card.pack_end(delete, False, False, 0)
+
+        row.add(card)
+        return row
+
+    # ------------------------------------------------------------ actions --
+    def copy_entry(self, entry):
+        text = (entry.get("body") or "").strip() or (entry.get("summary") or "")
+        if not text:
+            return
+        try:
+            subprocess.run(["wl-copy"], input=text, text=True, check=False)
+        except OSError:
+            return
+        subprocess.run(
+            [
+                "notify-send", "-a", "notif-history", "-t", "2000",
+                "Copied to clipboard", text[:120],
+            ],
+            check=False,
+        )
+
+    def on_activate(self, _listbox, row):
+        entry = getattr(row, "entry", None)
+        if entry is not None:
+            self.copy_entry(entry)
+            self.quit()
+
+    def on_delete(self, _btn, entry):
+        key = entry_key(entry)
+        keep = [e for e in load_entries() if entry_key(e) != key]
+        keep.reverse()  # back to oldest-first on disk
+        rewrite_log(keep)
+        signal_waybar()
+        self.reload()
+
+    def on_clear_all(self, *_):
+        rewrite_log([])
+        mark_seen()
+        self.reload()
+
+    def on_dnd(self, *_):
+        subprocess.run(
+            ["makoctl", "mode", "-t", "do-not-disturb"],
+            stdout=subprocess.DEVNULL,
+            check=False,
+        )
+        signal_waybar()
+        self.reload()
+
+    def on_key(self, _w, ev):
+        name = Gdk.keyval_name(ev.keyval)
+        ctrl = bool(ev.state & Gdk.ModifierType.CONTROL_MASK)
+        if name in ("Escape", "q"):
+            self.quit()
+            return True
+        if name in ("Delete", "BackSpace") or (ctrl and name == "d"):
+            row = self.listbox.get_selected_row()
+            entry = getattr(row, "entry", None) if row else None
+            if entry is not None:
+                idx = row.get_index()
+                self.on_delete(None, entry)
+                nxt = self.listbox.get_row_at_index(idx) or self.listbox.get_row_at_index(
+                    max(0, idx - 1)
+                )
+                if nxt is not None and nxt.get_selectable():
+                    self.listbox.select_row(nxt)
+                    nxt.grab_focus()
+            return True
+        if ctrl and name == "x":
+            self.on_clear_all()
+            return True
+        if name in ("j", "k"):  # vim-style navigation
+            row = self.listbox.get_selected_row()
+            idx = row.get_index() if row else 0
+            nxt = self.listbox.get_row_at_index(idx + (1 if name == "j" else -1))
+            if nxt is not None:
+                self.listbox.select_row(nxt)
+                nxt.grab_focus()
+            return True
+        return False
+
+    def quit(self):
+        mark_seen()
+        clear_pid()
+        Gtk.main_quit()
+
+
+def running_pid():
+    try:
+        with open(PID) as fh:
+            pid = int(fh.read().strip())
+    except (OSError, ValueError):
+        return None
+    try:
+        os.kill(pid, 0)
+    except OSError:
+        return None
+    return pid
+
+
+def clear_pid():
+    """Drop the pidfile, but only while it is still ours.
+
+    On a fast close/open cycle the outgoing instance would otherwise delete the
+    pidfile the incoming one just wrote, leaving the new panel invisible to the
+    next toggle -- which then opens a second panel instead of closing the first.
+    """
+    try:
+        with open(PID) as fh:
+            if int(fh.read().strip()) != os.getpid():
+                return
+    except (OSError, ValueError):
+        return
+    try:
+        os.unlink(PID)
+    except OSError:
+        pass
+
+
+def close_running():
+    pid = running_pid()
+    if pid is None:
+        return False
+    try:
+        os.kill(pid, signal.SIGTERM)
+    except OSError:
+        return False
+    # Wait for it to actually go, so an immediately following open is clean.
+    for _ in range(100):
+        try:
+            os.kill(pid, 0)
+        except OSError:
+            break
+        time.sleep(0.02)
+    return True
+
+
+def main():
+    mode = sys.argv[1] if len(sys.argv) > 1 else "--toggle"
+
+    if mode == "--close":
+        close_running()
+        return
+    if mode == "--toggle" and close_running():
+        return
+    if mode == "--open" and running_pid() is not None:
+        return
+
+    # A stale pidfile from a crashed panel must not block a fresh one.
+    if running_pid() is not None:
+        return
+    os.makedirs(STATE_DIR, exist_ok=True)
+    with open(PID, "w") as fh:
+        fh.write(str(os.getpid()))
+
+    provider = Gtk.CssProvider()
+    provider.load_from_data(CSS)
+    Gtk.StyleContext.add_provider_for_screen(
+        Gdk.Screen.get_default(), provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+    )
+
+    panel = Panel()
+    panel.show_all()
+
+    # SIGTERM is how the toggle closes an already-open panel.
+    GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, signal.SIGTERM, lambda *_: panel.quit())
+    Gtk.main()
+
+
+if __name__ == "__main__":
+    main()

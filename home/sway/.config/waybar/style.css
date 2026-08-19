@@ -1,9 +1,11 @@
+@import "work-context.css";
+
 * {
     border: none;
     border-radius: 3;
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: Ubuntu Mono, Roboto, Helvetica, Arial, sans-serif;
-    font-size: 16px;
+    font-family: 'Comic Mono';
+    font-size: 14px;
     min-height: 0;
 }
 
@@ -74,6 +76,7 @@ window#waybar.chromium {
 #network,
 #pulseaudio,
 #custom-media,
+#custom-notifications,
 #tray,
 #mode,
 #idle_inhibitor,
@@ -160,6 +163,19 @@ label:focus {
 }
 #custom-paru {
   background-color: blue;
+}
+
+#custom-notifications {
+    background-color: #34495e;
+}
+
+#custom-notifications.unread {
+    background-color: #d35400;
+}
+
+#custom-notifications.dnd {
+    background-color: #90b1b1;
+    color: #2d3436;
 }
 
 #custom-media.custom-vlc {

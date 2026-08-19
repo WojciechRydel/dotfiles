@@ -1,156 +1,275 @@
-{
-    "modules-left": [
-        "sway/workspaces",
-        "sway/mode",
-        "custom/media"
-    ],
-    "modules-center": [
-        "sway/window"
-    ],
-    "modules-right": [
-        "custom/paru",
-        "pulseaudio",
-        "network",
-        "cpu",
-        "memory",
-        "temperature",
-        "backlight",
-        "battery",
-        "battery#bat2",
-        "clock",
-        "tray"
-    ],
-    "sway/mode": {
-        "format": "<span style=\"italic\">{}</span>"
-    },
-    "mpd": {
-        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) \uf001",
-        "format-disconnected": "Disconnected \uf001",
-        "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped \uf001",
-        "unknown-tag": "N/A",
-        "interval": 2,
-        "consume-icons": {
-            "on": "\uf0c4 "
+[
+    {
+        "output": "DP-1",
+        "modules-left": [
+            "sway/workspaces",
+            "sway/mode",
+            "custom/media"
+        ],
+        "modules-center": [
+            "sway/window"
+        ],
+        "modules-right": [
+            "custom/timewarrior",
+            "custom/paru",
+            "pulseaudio",
+            "network",
+            "cpu",
+            "memory",
+            "temperature",
+            "backlight",
+            "battery",
+            "battery#bat2",
+            "clock#ny",
+            "clock#la",
+            "clock",
+            "custom/notifications",
+            "tray"
+        ],
+        "custom/work-context": {
+            "exec": "work-context _waybar-status",
+            "return-type": "json",
+            "interval": 1
         },
-        "random-icons": {
-            "off": "<span color=\"#f53c3c\">\uf074</span> ",
-            "on": "\uf074 "
+        "sway/mode": {
+            "format": "<span style=\"italic\">{}</span>"
         },
-        "repeat-icons": {
-            "on": "\uf01e "
+        "mpd": {
+            "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) \uf001",
+            "format-disconnected": "Disconnected \uf001",
+            "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped \uf001",
+            "unknown-tag": "N/A",
+            "interval": 2,
+            "consume-icons": {
+                "on": "\uf0c4 "
+            },
+            "random-icons": {
+                "off": "<span color=\"#f53c3c\">\uf074</span> ",
+                "on": "\uf074 "
+            },
+            "repeat-icons": {
+                "on": "\uf01e "
+            },
+            "single-icons": {
+                "on": "\uf01e1 "
+            },
+            "state-icons": {
+                "paused": "\uf04c",
+                "playing": "\uf04b"
+            },
+            "tooltip-format": "MPD (connected)",
+            "tooltip-format-disconnected": "MPD (disconnected)"
         },
-        "single-icons": {
-            "on": "\uf01e1 "
+        "idle_inhibitor": {
+            "format": "{icon}",
+            "format-icons": {
+                "activated": "\uf06e",
+                "deactivated": "\uf070"
+            }
         },
-        "state-icons": {
-            "paused": "\uf04c",
-            "playing": "\uf04b"
+        "tray": {
+            "spacing": 10
         },
-        "tooltip-format": "MPD (connected)",
-        "tooltip-format-disconnected": "MPD (disconnected)"
-    },
-    "idle_inhibitor": {
-        "format": "{icon}",
-        "format-icons": {
-            "activated": "\uf06e",
-            "deactivated": "\uf070"
-        }
-    },
-    "tray": {
-        "spacing": 10
-    },
-    "clock": {
-        "format": "{:%H:%M %Y-%m-%d}",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
-    },
-    "cpu": {
-        "format": "{usage}% \uf2db",
-        "tooltip": false
-    },
-    "memory": {
-        "format": "{}% \uf0c9"
-    },
-    "temperature": {
-        "critical-threshold": 80,
-        "format": "{temperatureC}\u00b0C {icon}",
-        "format-icons": [
-            "\uf76b",
-            "\uf2c9",
-            "\uf769"
-        ]
-    },
-    "backlight": {
-        "format": "{percent}% {icon}",
-        "format-icons": [
-            "\uf185",
-            "\uf111"
-        ]
-    },
-    "battery": {
-        "states": {
-            "warning": 30,
-            "critical": 15
+        "clock#ny": {
+            "format": "NY {:%H:%M}",
+            "timezone": "America/New_York"
         },
-        "format": "{capacity}% {icon}",
-        "format-charging": "{capacity}% \uf5e7",
-        "format-plugged": "{capacity}% \uf1e6",
-        "format-alt": "{time} {icon}",
-        "format-icons": [
-            "\uf244",
-            "\uf243",
-            "\uf242",
-            "\uf241",
-            "\uf240"
-        ]
-    },
-    "battery#bat2": {
-        "bat": "BAT2"
-    },
-    "network": {
-        "format-wifi": "{essid} ({signalStrength}%) \uf1eb",
-        "format-ethernet": "{ifname}: {ipaddr}/{cidr} \uf796",
-        "format-linked": "{ifname} (No IP) \uf796",
-        "format-disconnected": "Disconnected \u26a0",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}"
-    },
-    "pulseaudio": {
-        "format": "{volume}% {icon} {format_source}",
-        "format-bluetooth": "{volume}% {icon}\uf294 {format_source}",
-        "format-bluetooth-muted": "\uf6a9 {icon}\uf294 {format_source}",
-        "format-muted": "\uf6a9 {format_source}",
-        "format-source": "{volume}% \uf130",
-        "format-source-muted": "\uf131",
-        "format-icons": {
-            "headphone": "\uf025",
-            "hands-free": "\uf590",
-            "headset": "\uf590",
-            "phone": "\uf095",
-            "portable": "\uf095",
-            "car": "\uf1b9",
-            "default": [
-                "\uf026",
-                "\uf027",
-                "\uf028"
+        "clock#la": {
+            "format": "LA {:%H:%M}",
+            "timezone": "America/Los_Angeles"
+        },
+        "clock": {
+            "format": "{:%H:%M %Y-%m-%d}",
+            "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+        },
+        "cpu": {
+            "format": "{usage}% \uf2db",
+            "tooltip": false
+        },
+        "memory": {
+            "format": "{}% \uf0c9"
+        },
+        "temperature": {
+            "critical-threshold": 80,
+            "format": "{temperatureC}\u00b0C {icon}",
+            "format-icons": [
+                "\uf76b",
+                "\uf2c9",
+                "\uf769"
             ]
         },
-        "on-click": "pavucontrol"
-    },
-    "custom/media": {
-        "format": "{icon} {}",
-        "return-type": "json",
-        "max-length": 40,
-        "format-icons": {
-            "spotify": "\uf1bc",
-            "default": "\ud83c\udf9c"
+        "backlight": {
+            "format": "{percent}% {icon}",
+            "format-icons": [
+                "\uf185",
+                "\uf111"
+            ]
         },
-        "escape": true,
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null"
+        "battery": {
+            "states": {
+                "warning": 30,
+                "critical": 15
+            },
+            "format": "{capacity}% {icon}",
+            "format-charging": "{capacity}% \uf5e7",
+            "format-plugged": "{capacity}% \uf1e6",
+            "format-alt": "{time} {icon}",
+            "format-icons": [
+                "\uf244",
+                "\uf243",
+                "\uf242",
+                "\uf241",
+                "\uf240"
+            ]
+        },
+        "battery#bat2": {
+            "bat": "BAT2"
+        },
+        "network": {
+            "format-wifi": "{essid} ({signalStrength}%) \uf1eb",
+            "format-ethernet": "{ifname}: {ipaddr}/{cidr} \uf796",
+            "format-linked": "{ifname} (No IP) \uf796",
+            "format-disconnected": "Disconnected \u26a0",
+            "format-alt": "{ifname}: {ipaddr}/{cidr}"
+        },
+        "pulseaudio": {
+            "format": "{volume}% {icon} {format_source}",
+            "format-bluetooth": "{volume}% {icon}\uf294 {format_source}",
+            "format-bluetooth-muted": "\uf6a9 {icon}\uf294 {format_source}",
+            "format-muted": "\uf6a9 {format_source}",
+            "format-source": "{volume}% \uf130",
+            "format-source-muted": "\uf131",
+            "format-icons": {
+                "headphone": "\uf025",
+                "hands-free": "\uf590",
+                "headset": "\uf590",
+                "phone": "\uf095",
+                "portable": "\uf095",
+                "car": "\uf1b9",
+                "default": [
+                    "\uf026",
+                    "\uf027",
+                    "\uf028"
+                ]
+            },
+            "on-click": "pavucontrol"
+        },
+        "custom/media": {
+            "format": "{icon} {}",
+            "return-type": "json",
+            "max-length": 40,
+            "format-icons": {
+                "spotify": "\uf1bc",
+                "default": "\ud83c\udf9c"
+            },
+            "escape": true,
+            "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null"
+        },
+        "custom/paru": {
+            "exec": "~/.config/waybar/modules/paru-updates-status.sh",
+            "interval": 60,
+            "return-type": "json",
+            "format": "{}"
+        },
+        "custom/timewarrior": {
+            "exec": "~/.config/waybar/modules/timewarrior-status.sh",
+            "return-type": "json",
+            "format": "{}"
+        },
+        "custom/notifications": {
+            "exec": "notif-history --waybar",
+            "return-type": "json",
+            "interval": 60,
+            "signal": 8,
+            "format": "{}",
+            "tooltip": true,
+            "on-click": "notif-panel",
+            "on-click-middle": "makoctl dismiss --all && notif-history --mark-seen",
+            "on-click-right": "notif-history --dnd-toggle"
+        }
     },
-    "custom/paru": {
-        "exec": "~/.config/waybar/modules/paru-updates-status.sh",
-        "interval": 60,
-        "return-type": "json",
-        "format": "{}"
+    {
+        "output": "HDMI-A-1",
+        "modules-left": [
+            "sway/workspaces",
+            "sway/mode",
+            "custom/media"
+        ],
+        "custom/work-context": {
+            "exec": "work-context _waybar-status",
+            "return-type": "json",
+            "interval": 1
+        },
+        "modules-center": [
+            "sway/window"
+        ],
+        "modules-right": [
+            "custom/timewarrior",
+            "custom/paru",
+            "pulseaudio",
+            "network",
+            "cpu",
+            "memory",
+            "temperature",
+            "backlight",
+            "battery",
+            "battery#bat2",
+            "clock",
+            "custom/notifications",
+            "tray"
+        ],
+        "custom/notifications": {
+            "exec": "notif-history --waybar",
+            "return-type": "json",
+            "interval": 60,
+            "signal": 8,
+            "format": "{}",
+            "tooltip": true,
+            "on-click": "notif-panel",
+            "on-click-middle": "makoctl dismiss --all && notif-history --mark-seen",
+            "on-click-right": "notif-history --dnd-toggle"
+        }
+    },
+    {
+        "output": "HDMI-A-2",
+        "modules-left": [
+            "sway/workspaces",
+            "sway/mode",
+            "custom/media"
+        ],
+        "custom/work-context": {
+            "exec": "work-context _waybar-status",
+            "return-type": "json",
+            "interval": 1
+        },
+        "modules-center": [
+            "sway/window"
+        ],
+        "modules-right": [
+            "custom/timewarrior",
+            "custom/paru",
+            "pulseaudio",
+            "network",
+            "cpu",
+            "memory",
+            "temperature",
+            "backlight",
+            "battery",
+            "battery#bat2",
+            "clock",
+            "custom/notifications",
+            "tray"
+        ],
+        "custom/notifications": {
+            "exec": "notif-history --waybar",
+            "return-type": "json",
+            "interval": 60,
+            "signal": 8,
+            "format": "{}",
+            "tooltip": true,
+            "on-click": "notif-panel",
+            "on-click-middle": "makoctl dismiss --all && notif-history --mark-seen",
+            "on-click-right": "notif-history --dnd-toggle"
+        }
     }
-}
+]

@@ -1,0 +1,7 @@
+# Notifications (mako + notif-history)
+
+# $mod+n toggles the panel; the bemenu picker stays available as notif-history.
+bindsym $mod+n exec notif-panel
+bindsym $mod+Shift+n exec makoctl dismiss --all
+bindsym $mod+Ctrl+n exec makoctl restore
+bindsym $mod+Mod1+n exec notif-history --dnd-toggle

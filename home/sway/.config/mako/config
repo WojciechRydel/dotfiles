@@ -1,1 +1,86 @@
-default-timeout=3000
+# mako(5) -- see `man 5 mako`
+
+# ---------------------------------------------------------------- behaviour --
+max-visible=5
+max-history=100
+sort=-time
+layer=overlay
+anchor=top-right
+default-timeout=15000
+ignore-timeout=0
+group-by=app-name
+
+# Mirror every notification into the persistent TTL history. mako is
+# dbus-activated, so its PATH is the systemd user PATH and does not include
+# ~/.local/bin -- spell the path out.
+on-notify=exec "$HOME/.local/bin/notif-log" "$id"
+
+on-button-left=invoke-default-action
+on-button-middle=exec makoctl menu -n "$id" -- bemenu -i -l 10 --fn 'Ubuntu Mono 14' -p 'action'
+on-button-right=dismiss
+
+# -------------------------------------------------------------------- style --
+font=Comic Mono 12
+width=420
+height=220
+outer-margin=8
+margin=6
+padding=12
+border-size=2
+border-radius=3
+background-color=#2b303bf0
+text-color=#ffffff
+border-color=#64727d
+progress-color=over #4a5568
+icons=1
+max-icon-size=48
+icon-location=left
+markup=1
+format=<b>%s</b>\n%b
+
+[grouped]
+format=(%g) <b>%s</b>\n%b
+
+[hidden]
+format=<i>%h other notifications</i>
+background-color=#2b303bc0
+border-color=#4a5568
+
+# ----------------------------------------------------------------- urgency ---
+[urgency=low]
+default-timeout=10000
+border-color=#4a5568
+text-color=#c0c5ce
+
+[urgency=normal]
+default-timeout=15000
+border-color=#64727d
+
+# Critical never expires on its own -- dismiss it deliberately.
+[urgency=critical]
+default-timeout=0
+border-color=#eb4d4b
+background-color=#40201ff5
+
+# --------------------------------------------------------- do-not-disturb ----
+# Toggled with `makoctl mode -t do-not-disturb` ($mod+Alt+n). Notifications are
+# still delivered and still logged, they just aren't drawn.
+[mode=do-not-disturb]
+invisible=1
+
+# ...except critical ones, which always break through.
+[mode=do-not-disturb urgency=critical]
+invisible=0
+
+# ------------------------------------------------------------ app overrides --
+# This script's own "copied to clipboard" toasts would otherwise pollute the
+# very history they came from.
+[app-name=notif-history]
+default-timeout=2000
+history=0
+on-notify=none
+
+# Add per-app rules here, e.g.:
+# [app-name=Slack]
+# default-timeout=10000
+# border-color=#4a154b
