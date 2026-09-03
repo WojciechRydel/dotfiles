@@ -1,7 +1,8 @@
 # vim:filetype=zsh
 
-
-export PATH=/home/voytech/.pyenv/plugins/pyenv-virtualenv/shims:/home/voytech/.pyenv/shims:/home/voytech/.pyenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/voytech/.local/bin
+# PATH intentionally lives in .zshenv, not here: this file is only sourced for
+# login/interactive shells, so assigning PATH here gave `zsh -c ...` a
+# different command precedence than the prompt.
 
 source $ZDOTDIR/aliases
 
