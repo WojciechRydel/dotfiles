@@ -19,3 +19,16 @@ fi
 
 # oh-my-zsh
 export ZSH=/usr/share/oh-my-zsh
+
+# ZDOTDIR must be set here, in zshenv, so that $ZDOTDIR/.zshenv is found by
+# every shell type -- that is where PATH is settled.
+#
+# It cannot be derived from a bare ${XDG_CONFIG_HOME}: that variable is exported
+# by /etc/profile.d/xdg-dirs.sh, which /etc/profile sources, which only runs
+# later (from /etc/zsh/zprofile, login shells only). A shell that does not
+# already have XDG_CONFIG_HOME in its environment -- tty login, ssh, a systemd
+# user unit, anything started by a display manager -- would otherwise get
+# ZDOTDIR=/zsh and silently load none of the user's zsh config at all.
+# Default it here instead, with the same value xdg-dirs.sh uses.
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"

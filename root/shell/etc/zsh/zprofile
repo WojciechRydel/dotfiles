@@ -1,4 +1,6 @@
+# ZDOTDIR is already set in /etc/zsh/zshenv, which runs before this file and
+# is the only place early enough for $ZDOTDIR/.zshenv to be found. Re-assert it
+# after /etc/profile in case xdg-dirs.sh moved XDG_CONFIG_HOME.
 emulate sh -c 'source /etc/profile'
 
 export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
-
