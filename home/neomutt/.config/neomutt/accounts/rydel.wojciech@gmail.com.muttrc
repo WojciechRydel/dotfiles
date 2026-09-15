@@ -3,15 +3,15 @@ unmailboxes *
 
 set realname = "Wojciech Rydel"
 set from = "rydel.wojciech@gmail.com"
-set sendmail = "/usr/bin/msmtp -a gmail-private"
+set sendmail = "~/.local/bin/msmtpq -a gmail-private"
 
 set folder = "~/.mail/rydel.wojciech@gmail.com/"
 set mbox_type = Maildir
 set spoolfile = "+INBOX"
 set postponed = "+Drafts"
 set trash = "+Trash"
-set record = "+Sent"
+set record = "+Outbox"
 set my_archive = "Archives"
 
-mailboxes =INBOX ="Sent" =Drafts =Trash =Archives
+mailboxes =INBOX =Outbox ="Sent" =Drafts =Trash =Archives
 

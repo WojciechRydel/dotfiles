@@ -1,0 +1,31 @@
+# vim: filetype=neomuttrc
+# Basic colors
+color normal     default        default
+color indicator  brightwhite    blue
+color status     brightwhite    black
+color tree       brightmagenta  default
+color error      brightred      default
+color message    brightgreen    default
+color attachment brightyellow   default
+color search     brightyellow   magenta
+color markers    brightcyan     default
+
+# Index colors
+color index      brightwhite    default  "~N"  # new messages
+color index      brightred      default  "~F"  # flagged messages
+color index      brightblack    default  "~D"  # deleted messages
+color index      brightgreen    default  "~T"  # tagged messages
+
+# Header colors
+color header     brightcyan     default  "^(From|To|Cc|Bcc):"
+color header     brightyellow   default  "^Subject:"
+color header     brightmagenta  default  "^Date:"
+
+# Body colors
+color body       brightgreen    default  "(https?|ftp)://[^ ]+"  # URLs
+color body       brightcyan     default  "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}"  # email addresses
+color quoted     cyan           default
+color quoted1    green          default
+color quoted2    yellow         default
+color quoted3    magenta        default
+color signature  brightblack    default

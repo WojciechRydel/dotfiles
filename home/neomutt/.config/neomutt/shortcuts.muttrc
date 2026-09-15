@@ -40,9 +40,40 @@ bind pager \031 previous-line		# Mouse wheel
 bind pager \005 next-line		# Mouse wheel
 bind editor <Tab> complete-query
 
+# Vim-like visual mode
+bind index V tag-entry
+bind index v tag-thread
+
+# Vim-like search
+bind index,pager / search
+bind index,pager ? search-reverse
+bind index,pager n search-next
+bind index,pager N search-opposite
+
+# Vim-like marks (using flags as marks)
+bind index,pager m flag-message
+bind index,pager \' flag-message
+
+# Vim-like yank/paste (copy/save messages)
+bind index y save-message
+bind index,pager c copy-message
+bind index,pager s save-message
+
+# Additional vim-like bindings
+bind index,pager \Cb previous-page  # Ctrl+b (page up like vim)
+bind index,pager \Cf next-page      # Ctrl+f (page down like vim)
+bind index,pager H top              # H to top of page
+bind index,pager L bottom           # L to bottom
+bind index o sort-mailbox           # o to change sort order
+bind pager gg top
+bind index ~ limit                  # ~ for limit (like vim's filter)
+
 macro index,pager gi "<change-folder>=INBOX<enter>" "go to inbox"
 macro index,pager Mi ";<save-message>=INBOX<enter>" "move mail to inbox"
 macro index,pager Ci ";<copy-message>=INBOX<enter>" "copy mail to inbox"
+macro index,pager go "<change-folder>=Outbox<enter>" "go to outbox"
+macro index,pager Mo ";<save-message>=Outbox<enter>" "move mail to outbox"
+macro index,pager Co ";<copy-message>=Outbox<enter>" "copy mail to outbox"
 macro index,pager gd "<change-folder>=Drafts<enter>" "go to drafts"
 macro index,pager Md ";<save-message>=Drafts<enter>" "move mail to drafts"
 macro index,pager Cd ";<copy-message>=Drafts<enter>" "copy mail to drafts"
@@ -60,3 +91,6 @@ macro index,pager Ma ";<save-message>=Archives<enter><sync-mailbox>y" "move mail
 macro index,pager Ca ";<copy-message>=Archives<enter>" "copy mail to archive"
 macro index,pager <delet> ";<save-message>=Trash<enter>" "move to trash"
 macro index,pager D '<delete-message><sync-mailbox>y'
+
+# URL handling with urlscan
+macro index,pager \Cu "<pipe-message> urlscan<Enter>" "Extract URLs with urlscan"
